@@ -1,0 +1,112 @@
+﻿using System.Collections.Generic;
+using Project.Scripts.GoogleImporter;
+using Project.Scripts.Storage;
+using UnityEngine;
+
+namespace Project.Scripts.Inventory.Data
+{
+    public class GameStateProvider : IGameStateProvider, IGameStateSaver
+    {
+        private const string GameStateKey = "GameState";
+        private const string GameSettingsKey = "GameSettings";
+        private const string GameSettingsPath = @"D:\Repositoris\Testovoe-Inventory\Assets\Project\Resources";
+        
+        private const int Columns = 6;
+        private const int Rows = 5;
+        
+        private readonly IStorageService _storageService;
+
+        public GameStateProvider(IStorageService storageService)
+        {
+            _storageService = storageService;
+        }
+
+        public GameStateData GameState { get; private set; }
+        
+        public GameSettings GameSettings { get; private set; }
+        
+        public void SaveGameState()
+        {
+            _storageService.Save(GameStateKey, Application.persistentDataPath, GameState);
+        }
+
+        public void LoadGameState()
+        {
+            _storageService.Load<GameStateData>(GameStateKey, Application.persistentDataPath, data =>
+            {
+                GameState = data;
+            });
+            
+            _storageService.Load<GameSettings>(GameSettingsKey, GameSettingsPath, data =>
+            {
+                GameSettings = data;
+            });
+
+            if (GameState != null)
+                return;
+
+            GameState = InitFromSettings();
+            SaveGameState();
+        }
+
+        private GameStateData InitFromSettings()
+        {
+            var gameState = new GameStateData
+            {
+                Inventories = new List<InventoryGridData>
+                {
+                    CreateTestInventory("Player")
+                }
+            };
+
+            return gameState;
+        }
+        
+        private InventoryGridData CreateTestInventory(string ownerId)
+        {
+            var size = new Vector2Int(Columns, Rows);
+            var createdInventorySlots = new List<InventorySlotData>();
+            var length = size.x * size.y;
+
+            var items = CreateAllItems();
+            
+            for (int i = 0; i < items.Count; i++)
+            {
+                createdInventorySlots.Add(items[i]);
+            }
+
+            for (int i = items.Count; i < length; i++)
+            {
+                createdInventorySlots.Add(new InventorySlotData());
+            }
+
+            var createdInventoryData = new InventoryGridData()
+            {
+                OwnerId = ownerId,
+                Size = size,
+                Slots = createdInventorySlots
+            };
+
+            return createdInventoryData;
+        }
+
+        private List<InventorySlotData> CreateAllItems()
+        {
+            List<InventorySlotData> items = new List<InventorySlotData>();
+
+            for (int i = 0; i < GameSettings.Items.Count; i++)
+            {
+                items.Add(new InventorySlotData()
+                {
+                    ItemId = GameSettings.Items[i].Id,
+                    Amount = GameSettings.Items[i].CellCapacity,
+                    Capacity = GameSettings.Items[i].CellCapacity,
+                    IconName = GameSettings.Items[i].IconName,
+                    Description = GameSettings.Items[i].Description
+                });
+            }
+
+            return items;
+        }
+    }
+}
