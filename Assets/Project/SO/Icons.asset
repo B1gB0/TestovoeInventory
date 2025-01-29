@@ -20,6 +20,9 @@ MonoBehaviour:
   - {fileID: 309628545801974608, guid: 0ffd873c8fb41434dbdda011fecd5266, type: 3}
   - {fileID: -8301669352310886218, guid: 08064b1d2063a974f806a2da19d8d989, type: 3}
   - {fileID: -6422590786999500809, guid: 85899e582910a2640836dcff5a184dce, type: 3}
+  - {fileID: -2757887451555568444, guid: 3fca2ad2a9d2eb04eb8219fd5d36b93d, type: 3}
+  - {fileID: 21300000, guid: 6a2e34ff022215842bf40bad59fcb54f, type: 3}
+  - {fileID: -902086654454736923, guid: 4d61441a40af1164794e0fb45e4039cc, type: 3}
   <Keys>k__BackingField:
   - BodyArmorIcon
   - GunBulletsIcon
@@ -28,3 +31,6 @@ MonoBehaviour:
   - HelmetIcon
   - JacketIcon
   - MachineGunBulletsIcon
+  - Armor
+  - Ammo
+  - Medicine

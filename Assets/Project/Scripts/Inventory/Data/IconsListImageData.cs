@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.Scripts.Inventory.Data
 {
-    [CreateAssetMenu(menuName = "IconsDictionaryData")]
+    [CreateAssetMenu(menuName = "IconsOfItemsDictionaryData")]
     public class IconsListImageData : ScriptableObject
     {
         [field: SerializeField] public List<Sprite> Icons { get; private set; }

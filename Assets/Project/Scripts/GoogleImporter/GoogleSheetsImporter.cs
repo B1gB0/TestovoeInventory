@@ -61,20 +61,23 @@ namespace Project.Scripts.GoogleImporter
                 }
 
                 var rowsCount = tableArray.Count;
+                Debug.Log(rowsCount);
 
                 for (var i = 1; i < rowsCount; i++)
                 {
                     var row = tableArray[i];
                     var rowLength = rowsCount;
 
-                    for (var j = 0; j < rowLength - 1; j++)
+                    for (var j = 0; j < rowLength; j++)
                     {
                         var cell = row[j];
                         var header = _headers[j];
                         
                         parser.Parse(header, cell.ToString());
                         
-                        Debug.Log($"Header: {header}, value: {cell}");
+                        Debug.Log(header);
+
+                        //Debug.Log($"Header: {header}, value: {cell}");
                     }
                 }
                 

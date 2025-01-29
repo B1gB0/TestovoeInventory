@@ -2725,7 +2725,7 @@
         </member>
         <member name="P:Google.Apis.Auth.OAuth2.JsonCredentialParameters.ClientId">
             <summary>
-            Client Id associated with UserCredential created by
+            Client ItemId associated with UserCredential created by
             <a href="https://cloud.google.com/sdk/gcloud/reference/auth/login">GCloud Auth Login</a>
             or with an external account credential.
             </summary>
@@ -3782,7 +3782,7 @@
         <member name="T:Google.Apis.Auth.OAuth2.ServiceAccountCredential.Initializer">
             <summary>An initializer class for the service account credential. </summary>
         </member>
-        <member name="P:Google.Apis.Auth.OAuth2.ServiceAccountCredential.Initializer.Id">
+        <member name="P:Google.Apis.Auth.OAuth2.ServiceAccountCredential.Initializer.ItemId">
             <summary>Gets the service account ID (typically an e-mail address).</summary>
         </member>
         <member name="P:Google.Apis.Auth.OAuth2.ServiceAccountCredential.Initializer.ProjectId">
@@ -3833,7 +3833,7 @@
         <member name="F:Google.Apis.Auth.OAuth2.ServiceAccountCredential.UnixEpoch">
             <summary>Unix epoch as a <c>DateTime</c></summary>
         </member>
-        <member name="P:Google.Apis.Auth.OAuth2.ServiceAccountCredential.Id">
+        <member name="P:Google.Apis.Auth.OAuth2.ServiceAccountCredential.ItemId">
             <summary>Gets the service account ID (typically an e-mail address).</summary>
         </member>
         <member name="P:Google.Apis.Auth.OAuth2.ServiceAccountCredential.ProjectId">

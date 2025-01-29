@@ -9,7 +9,7 @@ namespace Project.Scripts.Inventory.Data
     {
         private const string GameStateKey = "GameState";
         private const string GameSettingsKey = "GameSettings";
-        private const string GameSettingsPath = @"D:\Repositoris\Testovoe-Inventory\Assets\Project\Resources";
+        private const string GameSettingsPath = @"D:\Repositoris\TestovoeInventory\Assets\Project\Resources";
         
         private const int Columns = 6;
         private const int Rows = 5;
@@ -102,8 +102,15 @@ namespace Project.Scripts.Inventory.Data
                     Amount = GameSettings.Items[i].CellCapacity,
                     Capacity = GameSettings.Items[i].CellCapacity,
                     IconName = GameSettings.Items[i].IconName,
-                    Description = GameSettings.Items[i].Description
+                    Description = GameSettings.Items[i].Description,
+                    ItemCharacteristics = GameSettings.Items[i].ItemCharacteristics,
+                    Weight = GameSettings.Items[i].Weight,
+                    ClassItem = GameSettings.Items[i].ClassItem,
+                    Title = GameSettings.Items[i].Title,
+                    Specialization = GameSettings.Items[i].Specialization
                 });
+                
+                Debug.Log(GameSettings.Items[i].Specialization);
             }
 
             return items;

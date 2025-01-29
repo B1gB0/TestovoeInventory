@@ -6,16 +6,13 @@ namespace Project.Scripts.Inventory.Controllers
 {
     public class InventorySlotController
     {
-        private const int MinValue = 1;
-        private const int Null = 0;
-
         private readonly InventorySlotView _view;
 
         public InventorySlotController(IReadOnlyInventorySlot slot, InventorySlotView view,
-            IconsDictionaryData iconsDictionaryData)
+            IconsOfItemsDictionaryData iconsOfItemsDictionaryData)
         {
             _view = view;
-            _view.GetData(iconsDictionaryData);
+            _view.GetData(iconsOfItemsDictionaryData);
 
             slot.ItemIdChanged += OnSlotItemIdChanged;
             slot.ItemAmountChanged += OnSlotItemAmountChanged;
@@ -25,24 +22,20 @@ namespace Project.Scripts.Inventory.Controllers
             OnSlotItemIdChanged(slot.ItemId);
             OnSlotItemAmountChanged(slot.Amount);
             OnSlotItemIconChanged(slot.IconName);
-            OnSlotItemDescription(slot.Description);
+            OnSlotItemDescription(slot.Description, slot.ItemCharacteristics, slot.ItemWeight, slot.ClassItem, 
+                slot.Title, slot.Specialization);
+            
+            _view.SetCapacity(slot.Capacity);
         }
         
         private void OnSlotItemIdChanged(string newItemId)
         {
-            _view.SetTitle(newItemId);
+            _view.SetId(newItemId);
         }
 
         private void OnSlotItemAmountChanged(int newAmount)
         {
-            if (newAmount > MinValue)
-            {
-                _view.SetAmount(newAmount);
-            }
-            else
-            {
-                _view.SetAmount(Null);
-            }
+            _view.SetAmount(newAmount);
         }
 
         private void OnSlotItemIconChanged(string newIconName)
@@ -56,9 +49,10 @@ namespace Project.Scripts.Inventory.Controllers
             _view.SetIcon(newIconName);
         }
 
-        private void OnSlotItemDescription(string newDescription)
+        private void OnSlotItemDescription(string newDescription, string characteristics,
+            string weight, string classItem, string title, string specialization)
         {
-            _view.SetDescription(newDescription);
+            _view.SetDescriptionData(newDescription, characteristics, weight, classItem, title, specialization);
         }
     }
 }

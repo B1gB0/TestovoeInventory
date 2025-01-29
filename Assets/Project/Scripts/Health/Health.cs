@@ -7,11 +7,8 @@ namespace Project.Scripts.Health
     public class Health : MonoBehaviour, IDamageable
     {
         private const float RecoveryRate = 10f;
-
-        [SerializeField] private Color _colorText;
+        
         [SerializeField] private float _value;
-        [SerializeField] private ParticleSystem _hitEffectPrefab;
-        [SerializeField] private Transform _hitPoint;
 
         private ParticleSystem _hitEffect;
         private Coroutine _coroutine;
@@ -19,11 +16,9 @@ namespace Project.Scripts.Health
 
         public event Action Die;
 
-        public event Action<string, Transform, Color> IsSpawnedDamageText;
-
-        public event Action IsDamaged;
-
         public event Action<float, float, float> HealthChanged;
+
+        public event Action<float> TargetHealthChanged;
 
         public float MaxHealth { get; private set; }
 
@@ -31,32 +26,21 @@ namespace Project.Scripts.Health
 
         public bool IsHitting { get; private set; }
 
-        public bool IsHealing { get; private set; }
-
-        private void Awake()
-        {
-            //_hitEffect = Instantiate(_hitEffectPrefab);
-            //_hitEffect.Stop();
-        }
-
         private void Start()
         {
             MaxHealth = _value;
             TargetHealth = _value;
             _currentHealth = _value;
-
+            
+            TargetHealthChanged?.Invoke(TargetHealth);
             HealthChanged?.Invoke(_currentHealth, TargetHealth, MaxHealth);
         }
 
         public void TakeDamage(float damage)
         {
-            IsSpawnedDamageText?.Invoke(damage.ToString(), transform, _colorText);
-            IsDamaged?.Invoke();
-
-            //_hitEffect.transform.position = _hitPoint.position;
-            //_hitEffect.Play();
-
             TargetHealth -= damage;
+            
+            TargetHealthChanged?.Invoke(TargetHealth);
 
             OnChangeHealth();
 
@@ -70,6 +54,8 @@ namespace Project.Scripts.Health
         public void AddHealth(float healthValue)
         {
             TargetHealth += healthValue;
+            
+            TargetHealthChanged?.Invoke(TargetHealth);
 
             OnChangeHealth();
 
@@ -77,9 +63,9 @@ namespace Project.Scripts.Health
                 TargetHealth = MaxHealth;
         }
 
-        public void SetHealthValue()
+        public void SetHealthValue(float value)
         {
-            TargetHealth = _value;
+            TargetHealth = value;
 
             OnChangeHealth();
         }

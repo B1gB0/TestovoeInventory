@@ -1102,8 +1102,8 @@
             Specifies default value handling options for the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeDefaultValueHandlingObject" title="DefaultValueHandling Class" />
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeDefaultValueHandlingExample" title="DefaultValueHandling Ignore Example" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeDefaultValueHandlingObject" id="DefaultValueHandling Class" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeDefaultValueHandlingExample" id="DefaultValueHandling Ignore Example" />
             </example>
         </member>
         <member name="F:Newtonsoft.Json.DefaultValueHandling.Include">
@@ -1252,9 +1252,9 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonArrayAttribute.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonArrayAttribute"/> class with the specified container Id.
+            Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonArrayAttribute"/> class with the specified container ItemId.
             </summary>
-            <param name="id">The container Id.</param>
+            <param name="id">The container ItemId.</param>
         </member>
         <member name="T:Newtonsoft.Json.JsonConstructorAttribute">
             <summary>
@@ -1266,7 +1266,7 @@
             Instructs the <see cref="T:Newtonsoft.Json.JsonSerializer"/> how to serialize the object.
             </summary>
         </member>
-        <member name="P:Newtonsoft.Json.JsonContainerAttribute.Id">
+        <member name="P:Newtonsoft.Json.JsonContainerAttribute.ItemId">
             <summary>
             Gets or sets the id.
             </summary>
@@ -1274,9 +1274,9 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonContainerAttribute.Title">
             <summary>
-            Gets or sets the title.
+            Gets or sets the id.
             </summary>
-            <value>The title.</value>
+            <value>The id.</value>
         </member>
         <member name="P:Newtonsoft.Json.JsonContainerAttribute.Description">
             <summary>
@@ -1357,16 +1357,16 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonContainerAttribute.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonContainerAttribute"/> class with the specified container Id.
+            Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonContainerAttribute"/> class with the specified container ItemId.
             </summary>
-            <param name="id">The container Id.</param>
+            <param name="id">The container ItemId.</param>
         </member>
         <member name="T:Newtonsoft.Json.JsonConvert">
             <summary>
             Provides methods for converting between .NET types and JSON types.
             </summary>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="SerializeObject" title="Serializing and Deserializing JSON with JsonConvert" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="SerializeObject" id="Serializing and Deserializing JSON with JsonConvert" />
             </example>
         </member>
         <member name="P:Newtonsoft.Json.JsonConvert.DefaultSettings">
@@ -2093,9 +2093,9 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonDictionaryAttribute.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonDictionaryAttribute"/> class with the specified container Id.
+            Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonDictionaryAttribute"/> class with the specified container ItemId.
             </summary>
-            <param name="id">The container Id.</param>
+            <param name="id">The container ItemId.</param>
         </member>
         <member name="T:Newtonsoft.Json.JsonException">
             <summary>
@@ -2221,9 +2221,9 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonObjectAttribute.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonObjectAttribute"/> class with the specified container Id.
+            Initializes a new instance of the <see cref="T:Newtonsoft.Json.JsonObjectAttribute"/> class with the specified container ItemId.
             </summary>
-            <param name="id">The container Id.</param>
+            <param name="id">The container ItemId.</param>
         </member>
         <member name="T:Newtonsoft.Json.JsonPropertyAttribute">
             <summary>
@@ -6027,7 +6027,7 @@
             Represents a JSON array.
             </summary>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" id="Parsing a JSON Array from Text" />
             </example>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JArray.WriteToAsync(Newtonsoft.Json.JsonWriter,System.Threading.CancellationToken,Newtonsoft.Json.JsonConverter[])">
@@ -6116,7 +6116,7 @@
             <param name="json">A <see cref="T:System.String"/> that contains JSON.</param>
             <returns>A <see cref="T:Newtonsoft.Json.Linq.JArray"/> populated from the string that contains JSON.</returns>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" id="Parsing a JSON Array from Text" />
             </example>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JArray.Parse(System.String,Newtonsoft.Json.Linq.JsonLoadSettings)">
@@ -6128,7 +6128,7 @@
             If this is <c>null</c>, default load settings will be used.</param>
             <returns>A <see cref="T:Newtonsoft.Json.Linq.JArray"/> populated from the string that contains JSON.</returns>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" id="Parsing a JSON Array from Text" />
             </example>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JArray.FromObject(System.Object)">
@@ -6564,7 +6564,7 @@
             Represents a JSON object.
             </summary>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" id="Parsing a JSON Object from Text" />
             </example>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JObject.WriteToAsync(Newtonsoft.Json.JsonWriter,System.Threading.CancellationToken,Newtonsoft.Json.JsonConverter[])">
@@ -6716,7 +6716,7 @@
                 <paramref name="json"/> is not valid JSON.
             </exception>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" id="Parsing a JSON Object from Text" />
             </example>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JObject.Parse(System.String,Newtonsoft.Json.Linq.JsonLoadSettings)">
@@ -6731,7 +6731,7 @@
                 <paramref name="json"/> is not valid JSON.
             </exception>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" id="Parsing a JSON Object from Text" />
             </example>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JObject.FromObject(System.Object)">
@@ -8910,8 +8910,8 @@
             Specifies null value handling options for the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
             </summary>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeNullValueHandlingObject" title="NullValueHandling Class" />
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeNullValueHandlingExample" title="NullValueHandling Ignore Example" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeNullValueHandlingObject" id="NullValueHandling Class" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeNullValueHandlingExample" id="NullValueHandling Ignore Example" />
             </example>
         </member>
         <member name="F:Newtonsoft.Json.NullValueHandling.Include">
@@ -8950,7 +8950,7 @@
             Note that references cannot be preserved when a value is set via a non-default constructor such as types that implement <see cref="T:System.Runtime.Serialization.ISerializable"/>.
             </summary>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="PreservingObjectReferencesOn" title="Preserve Object References" />       
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="PreservingObjectReferencesOn" id="Preserve Object References" />       
             </example>
         </member>
         <member name="F:Newtonsoft.Json.PreserveReferencesHandling.None">
@@ -9094,14 +9094,14 @@
             </note>
             </summary>
         </member>
-        <member name="P:Newtonsoft.Json.Schema.JsonSchema.Id">
+        <member name="P:Newtonsoft.Json.Schema.JsonSchema.ItemId">
             <summary>
             Gets or sets the id.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Schema.JsonSchema.Title">
             <summary>
-            Gets or sets the title.
+            Gets or sets the id.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.Schema.JsonSchema.Required">
@@ -9542,7 +9542,7 @@
         <member name="T:Newtonsoft.Json.Schema.UndefinedSchemaIdHandling">
             <summary>
             <para>
-            Specifies undefined schema Id handling options for the <see cref="T:Newtonsoft.Json.Schema.JsonSchemaGenerator"/>.
+            Specifies undefined schema ItemId handling options for the <see cref="T:Newtonsoft.Json.Schema.JsonSchemaGenerator"/>.
             </para>
             <note type="caution">
             JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
@@ -9551,17 +9551,17 @@
         </member>
         <member name="F:Newtonsoft.Json.Schema.UndefinedSchemaIdHandling.None">
             <summary>
-            Do not infer a schema Id.
+            Do not infer a schema ItemId.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.UndefinedSchemaIdHandling.UseTypeName">
             <summary>
-            Use the .NET type name as the schema Id.
+            Use the .NET type name as the schema ItemId.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.Schema.UndefinedSchemaIdHandling.UseAssemblyQualifiedName">
             <summary>
-            Use the assembly qualified .NET type name as the schema Id.
+            Use the assembly qualified .NET type name as the schema ItemId.
             </summary>
         </member>
         <member name="T:Newtonsoft.Json.Schema.ValidationEventArgs">
@@ -10057,8 +10057,8 @@
             Used by <see cref="T:Newtonsoft.Json.JsonSerializer"/> to resolve a <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/> for a given <see cref="T:System.Type"/>.
             </summary>
             <example>
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeContractResolverObject" title="IContractResolver Class" />
-              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeContractResolverExample" title="IContractResolver Example" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeContractResolverObject" id="IContractResolver Class" />
+              <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeContractResolverExample" id="IContractResolver Example" />
             </example>
         </member>
         <member name="M:Newtonsoft.Json.Serialization.IContractResolver.ResolveContract(System.Type)">

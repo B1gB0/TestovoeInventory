@@ -24,10 +24,12 @@ namespace Project.Scripts.Inventory
         }
 
         public AddItemsToInventoryGridResult AddItemsToInventory(string ownerId, string itemId, int itemSlotCapacity,
-            string iconName, string description, int amount = 1)
+            string iconName, string description, string itemCharacteristics, string weight, string classItem,
+            string title, string specialization, int amount = 1)
         {
             var inventory = _inventoriesMap[ownerId];
-            var result = inventory.AddItem(itemId, itemSlotCapacity, iconName, description, amount);
+            var result = inventory.AddItem(itemId, itemSlotCapacity, iconName, description, itemCharacteristics,
+                weight, classItem, title, specialization, amount);
             
             _gameStateSaver.SaveGameState();
             
@@ -36,10 +38,12 @@ namespace Project.Scripts.Inventory
 
         public AddItemsToInventoryGridResult AddItemsToInventory(
             string ownerId, Vector2Int slotCoords, string itemId, int itemSlotCapacity, string iconName,
-            string description, int amount = 1)
+            string description, string itemCharacteristics, string weight, string classItem, string title, 
+            string specialization, int amount = 1)
         {
             var inventory = _inventoriesMap[ownerId];
-            var result = inventory.AddItem(slotCoords, itemId, itemSlotCapacity, iconName, description, amount);
+            var result = inventory.AddItem(slotCoords, itemId, itemSlotCapacity, iconName, description, itemCharacteristics, 
+                weight,  classItem, title, specialization, amount);
             
             _gameStateSaver.SaveGameState();
             

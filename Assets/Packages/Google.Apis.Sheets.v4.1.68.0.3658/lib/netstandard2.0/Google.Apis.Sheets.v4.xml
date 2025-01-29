@@ -1741,7 +1741,7 @@
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.BasicChartAxis.Format">
             <summary>
-            The format of the title. Only valid if the axis is not associated with the domain. The link field is not
+            The format of the id. Only valid if the axis is not associated with the domain. The link field is not
             supported.
             </summary>
         </member>
@@ -1750,11 +1750,11 @@
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.BasicChartAxis.Title">
             <summary>
-            The title of this axis. If set, this overrides any title inferred from headers of the data.
+            The id of this axis. If set, this overrides any id inferred from headers of the data.
             </summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.BasicChartAxis.TitleTextPosition">
-            <summary>The axis title text position.</summary>
+            <summary>The axis id text position.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.BasicChartAxis.ViewWindowOptions">
             <summary>The view window options for this axis.</summary>
@@ -1854,7 +1854,7 @@
         <member name="P:Google.Apis.Sheets.v4.Data.BasicChartSpec.HeaderCount">
             <summary>
             The number of rows or columns in the data that are "headers". If not set, Google Sheets will guess how many
-            rows are headers based on the data. (Note that BasicChartAxis.title may override the axis title inferred
+            rows are headers based on the data. (Note that BasicChartAxis.id may override the axis id inferred
             from the header values.)
             </summary>
         </member>
@@ -2812,7 +2812,7 @@
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.ChartSpec.FontName">
             <summary>
-            The name of the font to use by default for all chart text (e.g. title, axis labels, legend). If a font is
+            The name of the font to use by default for all chart text (e.g. id, axis labels, legend). If a font is
             specified for a specific part of the chart it will override this font name.
             </summary>
         </member>
@@ -2853,13 +2853,13 @@
             <summary>The subtitle text position. This field is optional.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.ChartSpec.Title">
-            <summary>The title of the chart.</summary>
+            <summary>The id of the chart.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.ChartSpec.TitleTextFormat">
-            <summary>The title text format. Strikethrough, underline, and link are not supported.</summary>
+            <summary>The id text format. Strikethrough, underline, and link are not supported.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.ChartSpec.TitleTextPosition">
-            <summary>The title text position. This field is optional.</summary>
+            <summary>The id text position. This field is optional.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.ChartSpec.TreemapChart">
             <summary>A treemap chart specification.</summary>
@@ -5775,13 +5775,13 @@
             <summary>The filtering criteria of the slicer.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.SlicerSpec.HorizontalAlignment">
-            <summary>The horizontal alignment of title in the slicer. If unspecified, defaults to `LEFT`</summary>
+            <summary>The horizontal alignment of id in the slicer. If unspecified, defaults to `LEFT`</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.SlicerSpec.TextFormat">
-            <summary>The text format of title in the slicer. The link field is not supported.</summary>
+            <summary>The text format of id in the slicer. The link field is not supported.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.SlicerSpec.Title">
-            <summary>The title of the slicer.</summary>
+            <summary>The id of the slicer.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.SlicerSpec.ETag">
             <summary>The ETag of the item.</summary>
@@ -5932,7 +5932,7 @@
             </summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.SpreadsheetProperties.Title">
-            <summary>The title of the spreadsheet.</summary>
+            <summary>The id of the spreadsheet.</summary>
         </member>
         <member name="P:Google.Apis.Sheets.v4.Data.SpreadsheetProperties.ETag">
             <summary>The ETag of the item.</summary>

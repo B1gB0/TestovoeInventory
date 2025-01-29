@@ -2,9 +2,9 @@
 {
     public class Gun : Weapon
     {
-        public override void Shoot(Health.Health health, int damage)
+        public override void Shoot(Health.Health health, int damage, int armor)
         {
-            health.TakeDamage(damage);
+            health.TakeDamage(damage - armor);
         }
     }
 }

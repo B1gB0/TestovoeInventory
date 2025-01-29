@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Project.Scripts.GoogleImporter
 {
@@ -43,6 +44,13 @@ namespace Project.Scripts.GoogleImporter
                     break;
                 case "Weight":
                     _currentItemSettings.Weight = token;
+                    break;
+                case "ClassItem":
+                    _currentItemSettings.ClassItem = token;
+                    break;
+                case "Specialization":
+                    Debug.Log(_currentItemSettings.Specialization);
+                    _currentItemSettings.Specialization = token;
                     break;
                 default:
                     throw new Exception($"Invalid header: {header}");

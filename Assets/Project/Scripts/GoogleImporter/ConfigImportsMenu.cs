@@ -9,8 +9,8 @@ namespace Project.Scripts.GoogleImporter
         private const string SpreadSheetId = "1iAaPrtWuk4j_PjGhnbbAaK5NDEr_gaWDcrcMwfLJ-1c";
         private const string ItemsSheetsName = "InventoryItems";
         private const string SettingsFileName = "GameSettings";
-        private const string CredentialPath = "inventoryconfigs-1b193169aeea.json";
-        private const string GameSettingsPath = @"D:\Repositoris\Testovoe-Inventory\Assets\Project\Resources";
+        private const string CredentialPath = "inventoryconfigs-2a78890166af.json";
+        private const string GameSettingsPath = @"D:\Repositoris\TestovoeInventory\Assets\Project\Resources";
 
         private static readonly JsonToFileStorageService _storageService = new();
         

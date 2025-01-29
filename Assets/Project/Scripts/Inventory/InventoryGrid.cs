@@ -52,9 +52,11 @@ namespace Project.Scripts.Inventory
         }
         
         public AddItemsToInventoryGridResult AddItem(string itemId, int itemSlotCapacity, string iconName,
-            string description, int amount = 1)
+            string description, string characteristics, string weight, string classItem, string title,
+            string specialization, int amount = 1)
         {
             var remainingAmount = amount;
+            
             var itemsAddedToSlotsWithSameItemsAmount = AddToSlotsWithSameItems(itemId, remainingAmount, 
                 itemSlotCapacity, out remainingAmount);
 
@@ -65,23 +67,25 @@ namespace Project.Scripts.Inventory
             }
 
             var itemsAddedToAvailableSlotsAmount = AddToFirstAvailableSlots(itemId, remainingAmount, 
-                itemSlotCapacity, iconName, description, out remainingAmount);
+                itemSlotCapacity, iconName, description, characteristics, weight, classItem, title, specialization,
+                out remainingAmount);
+            
             var totalAddedItemsAmount = itemsAddedToSlotsWithSameItemsAmount + itemsAddedToAvailableSlotsAmount;
 
             return new AddItemsToInventoryGridResult(OwnerId, amount, totalAddedItemsAmount);
         }
 
         public AddItemsToInventoryGridResult AddItem(Vector2Int slotCoords, string itemId, int itemSlotCapacity,
-            string iconName, string description, int amount = 1)
+            string iconName, string description, string characteristics, string weight, string classItem, string title,
+            string specialization, int amount = 1)
         {
             var slot = _mapSlots[slotCoords];
             var newValue = slot.Amount + amount;
-            Debug.Log(newValue);
             var itemsAddedAmount = 0;
 
             if (slot.IsEmpty)
             {
-                slot.GetItemId(itemId, iconName, description);
+                slot.GetItemId(itemId, iconName, description, characteristics, weight, classItem, title, specialization);
             }
 
             if (newValue > itemSlotCapacity)
@@ -91,7 +95,9 @@ namespace Project.Scripts.Inventory
                 itemsAddedAmount += itemsToAddAmount;
                 slot.GetAmount(itemSlotCapacity);
 
-                var result = AddItem(itemId, itemSlotCapacity, iconName, description, remainingItems);
+                var result = AddItem(itemId, itemSlotCapacity, iconName, description, characteristics,
+                    weight, classItem, title, specialization, remainingItems);
+                
                 itemsAddedAmount += result.ItemsAddedAmount;
             }
             else
@@ -158,7 +164,8 @@ namespace Project.Scripts.Inventory
 
             if (slot.Amount == 0)
             {
-                slot.GetItemId(null, null, null);
+                slot.GetItemId(null, null, null, null, null, null, null,
+                    null);
             }
             
             ItemsRemoved?.Invoke(itemId, amount);
@@ -197,10 +204,17 @@ namespace Project.Scripts.Inventory
             var tempSlotAmount = slotA.Amount;
             var tempSlotIcon = slotA.IconName;
             var tempSlotDescription = slotA.Description;
+            var tempSlotItemValue = slotA.ItemCharacteristics;
+            var tempSlotItemWeight = slotA.ItemWeight;
+            var tempSlotItemClass = slotA.ClassItem;
+            var tempSlotItemTitle = slotA.Title;
+            var tempSlotItemSpecialization = slotA.Specialization;
             
-            slotA.GetItemId(slotB.ItemId, slotB.IconName, slotB.Description);
+            slotA.GetItemId(slotB.ItemId, slotB.IconName, slotB.Description, slotB.ItemCharacteristics,
+                slotB.ItemWeight, slotB.ClassItem, slotB.Title, slotB.Specialization);
             slotA.GetAmount(slotB.Amount);
-            slotB.GetItemId(tempSlotItemId, tempSlotIcon, tempSlotDescription);
+            slotB.GetItemId(tempSlotItemId, tempSlotIcon, tempSlotDescription, tempSlotItemValue,
+                tempSlotItemWeight, tempSlotItemClass, tempSlotItemTitle, tempSlotItemSpecialization);
             slotB.GetAmount(tempSlotAmount);
         }
 
@@ -283,7 +297,8 @@ namespace Project.Scripts.Inventory
         }
         
         private int AddToFirstAvailableSlots(string itemId, int amount, int itemSlotCapacity, string iconName,
-            string description, out int remainingAmount)
+            string description, string characteristics, string weight, string classItem, string title,
+            string specialization, out int remainingAmount)
         {
             var itemsAddedAmount = 0;
             remainingAmount = amount;
@@ -300,7 +315,7 @@ namespace Project.Scripts.Inventory
                         continue;
                     }
 
-                    slot.GetItemId(itemId, iconName, description);
+                    slot.GetItemId(itemId, iconName, description, characteristics, weight, classItem, title, specialization);
                     var newValue = remainingAmount;
 
                     if (newValue > itemSlotCapacity)

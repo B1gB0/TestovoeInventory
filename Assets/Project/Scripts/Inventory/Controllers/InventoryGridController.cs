@@ -7,13 +7,14 @@ namespace Project.Scripts.Inventory.Controllers
 {
     public class InventoryGridController
     {
-        private readonly IconsDictionaryData _iconsDictionaryData;
+        private readonly IconsOfItemsDictionaryData _iconsOfItemsDictionaryData;
         private readonly List<InventorySlotController> _slotControllers = new();
 
         public InventoryGridController(IReadOnlyInventoryGrid inventory, InventoryView view,
-            IconsDictionaryData iconsDictionaryData)
+            IconsOfItemsDictionaryData iconsOfItemsDictionaryData, InventoryService inventoryService)
         {
-            _iconsDictionaryData = iconsDictionaryData;
+            _iconsOfItemsDictionaryData = iconsOfItemsDictionaryData;
+
             var size = inventory.Size;
             var slots = inventory.GetSlots();
             var lineLength = size.y;
@@ -26,7 +27,7 @@ namespace Project.Scripts.Inventory.Controllers
                     var slotView = view.GetInventorySlotView(index);
                     var slot = slots[i, j];
 
-                    _slotControllers.Add(new InventorySlotController(slot, slotView, _iconsDictionaryData));
+                    _slotControllers.Add(new InventorySlotController(slot, slotView, _iconsOfItemsDictionaryData));
                 }
             }
             

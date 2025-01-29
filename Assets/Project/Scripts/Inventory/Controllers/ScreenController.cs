@@ -7,15 +7,15 @@ namespace Project.Scripts.Inventory.Controllers
     {
         private readonly InventoryService _inventoryService;
         private readonly ScreenView _view;
-        private readonly IconsDictionaryData _iconsDictionaryData;
+        private readonly IconsOfItemsDictionaryData _iconsOfItemsDictionaryData;
 
         private InventoryGridController _currentInventoryController;
 
         public ScreenController(InventoryService inventoryService, ScreenView view,
-            IconsDictionaryData iconsDictionaryData)
+            IconsOfItemsDictionaryData iconsOfItemsDictionaryData)
         {
             _inventoryService = inventoryService;
-            _iconsDictionaryData = iconsDictionaryData;
+            _iconsOfItemsDictionaryData = iconsOfItemsDictionaryData;
             _view = view;
         }
 
@@ -24,7 +24,8 @@ namespace Project.Scripts.Inventory.Controllers
             var inventory = _inventoryService.GetInventory(ownerId);
             var inventoryView = _view.InventoryView;
 
-            _currentInventoryController = new InventoryGridController(inventory, inventoryView, _iconsDictionaryData);
+            _currentInventoryController = new InventoryGridController(inventory, inventoryView,
+                _iconsOfItemsDictionaryData, _inventoryService);
         }
     }
 }

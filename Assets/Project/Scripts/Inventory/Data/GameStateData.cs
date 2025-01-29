@@ -5,5 +5,6 @@ namespace Project.Scripts.Inventory.Data
     public class GameStateData
     {
         public List<InventoryGridData> Inventories;
+        public PlayerData PlayerData;
     }
 }

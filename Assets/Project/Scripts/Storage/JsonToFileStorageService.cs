@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Project.Scripts.Storage
 {
@@ -36,6 +37,7 @@ namespace Project.Scripts.Storage
 
         private async void SaveAsync(string key, string path, object data, Action<bool> callback)
         {
+            Debug.Log(key +" " + path);
             path = BuildPath(path, key);
             string json = JsonConvert.SerializeObject(data);
 

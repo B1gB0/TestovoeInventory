@@ -10,5 +10,10 @@ namespace Project.Scripts.Inventory.Data
         public int Capacity;
         public string IconName;
         public string Description;
+        public string ItemCharacteristics;
+        public string Weight;
+        public string ClassItem;
+        public string Title;
+        public string Specialization;
     }
 }

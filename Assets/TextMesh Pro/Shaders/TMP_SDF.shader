@@ -144,7 +144,7 @@ SubShader {
 			float4	position		: SV_POSITION;
 			fixed4	color			: COLOR;
 			float2	atlas			: TEXCOORD0;		// Atlas
-			float4	param			: TEXCOORD1;		// alphaClip, scale, bias, weight
+			float4	param			: TEXCOORD1;		// alphaClip, scale, bias, Weight
 			float4	mask			: TEXCOORD2;		// Position in object space(xy), pixel Size(zw)
 			float3	viewDir			: TEXCOORD3;
 
@@ -205,7 +205,7 @@ SubShader {
 
 			float bScale = scale;
 			bScale /= 1 + ((_UnderlaySoftness*_ScaleRatioC) * bScale);
-			float bBias = (0.5 - weight) * bScale - 0.5 - ((_UnderlayDilate * _ScaleRatioC) * 0.5 * bScale);
+			float bBias = (0.5 - Weight) * bScale - 0.5 - ((_UnderlayDilate * _ScaleRatioC) * 0.5 * bScale);
 
 			float x = -(_UnderlayOffsetX * _ScaleRatioC) * _GradientScale / _TextureWidth;
 			float y = -(_UnderlayOffsetY * _ScaleRatioC) * _GradientScale / _TextureHeight;
@@ -273,7 +273,7 @@ SubShader {
 
 		    #if BEVEL_ON
 			float3 dxy = float3(0.5 / _TextureWidth, 0.5 / _TextureHeight, 0);
-			float3 n = GetSurfaceNormal(input.atlas, weight, dxy);
+			float3 n = GetSurfaceNormal(input.atlas, Weight, dxy);
 
 			float3 bump = UnpackNormal(tex2D(_BumpMap, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y)).xyz;
 			bump *= lerp(_BumpFace, _BumpOutline, saturate(sd + outline * 0.5));
