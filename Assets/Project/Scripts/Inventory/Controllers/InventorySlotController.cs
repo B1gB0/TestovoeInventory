@@ -49,8 +49,8 @@ namespace Project.Scripts.Inventory.Controllers
             _view.SetIcon(newIconName);
         }
 
-        private void OnSlotItemDescription(string newDescription, string characteristics,
-            string weight, string classItem, string title, string specialization)
+        private void OnSlotItemDescription(string newDescription, int characteristics,
+            float weight, string classItem, string title, string specialization)
         {
             _view.SetDescriptionData(newDescription, characteristics, weight, classItem, title, specialization);
         }

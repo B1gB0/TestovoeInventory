@@ -10,8 +10,8 @@ namespace Project.Scripts.GoogleImporter
         public string Title;
         public string Description;
         public string IconName;
-        public string ItemCharacteristics;
-        public string Weight;
+        public int ItemCharacteristics;
+        public float Weight;
         public string ClassItem;
         public string Specialization;
     }

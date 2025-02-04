@@ -52,7 +52,7 @@ namespace Project.Scripts.Inventory
         }
         
         public AddItemsToInventoryGridResult AddItem(string itemId, int itemSlotCapacity, string iconName,
-            string description, string characteristics, string weight, string classItem, string title,
+            string description, int characteristics, float weight, string classItem, string title,
             string specialization, int amount = 1)
         {
             var remainingAmount = amount;
@@ -76,7 +76,7 @@ namespace Project.Scripts.Inventory
         }
 
         public AddItemsToInventoryGridResult AddItem(Vector2Int slotCoords, string itemId, int itemSlotCapacity,
-            string iconName, string description, string characteristics, string weight, string classItem, string title,
+            string iconName, string description, int characteristics, float weight, string classItem, string title,
             string specialization, int amount = 1)
         {
             var slot = _mapSlots[slotCoords];
@@ -164,7 +164,7 @@ namespace Project.Scripts.Inventory
 
             if (slot.Amount == 0)
             {
-                slot.GetItemId(null, null, null, null, null, null, null,
+                slot.GetItemId(null, null, null, 0, 0, null, null,
                     null);
             }
             
@@ -297,7 +297,7 @@ namespace Project.Scripts.Inventory
         }
         
         private int AddToFirstAvailableSlots(string itemId, int amount, int itemSlotCapacity, string iconName,
-            string description, string characteristics, string weight, string classItem, string title,
+            string description, int characteristics, float weight, string classItem, string title,
             string specialization, out int remainingAmount)
         {
             var itemsAddedAmount = 0;

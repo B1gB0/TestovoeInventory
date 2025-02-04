@@ -25,15 +25,17 @@ namespace Project.Scripts.Inventory.View
         
         public string ClassItem { get; private set; }
         
-        public string Characteristics { get; private set; }
+        public int Characteristics { get; private set; }
         
-        public string Weight { get; private set; }
+        public float Weight { get; private set; }
         
         public int Capacity { get; private set; }
         
         public int Amount { get; private set; }
 
         public string Specialization { get; private set; }
+        
+        public string IconName { get; private set; }
 
         public Sprite Sprite => _icon.sprite;
 
@@ -56,11 +58,12 @@ namespace Project.Scripts.Inventory.View
 
         public void SetIcon(string iconName)
         {
+            IconName = iconName;
             _icon.sprite = _iconsOfItemsData.Icons[iconName];
             _icon.gameObject.SetActive(true);
         }
 
-        public void SetDescriptionData(string description, string itemValue, string itemWeight, string classItem, 
+        public void SetDescriptionData(string description, int itemValue, float itemWeight, string classItem, 
             string title, string specialization)
         {
             Description = description;
@@ -69,6 +72,7 @@ namespace Project.Scripts.Inventory.View
             ClassItem = classItem;
             Title = title;
             Specialization = specialization;
+            Debug.Log(specialization);
         }
 
         public void SetCapacity(int capacity)

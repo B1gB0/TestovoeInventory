@@ -17,24 +17,26 @@ namespace Project.Scripts.Player
             ["MachineGun"] = new MachineGun()
         };
         
-        [SerializeField] private Health.Health _health;
         [SerializeField] private HealthBar _healthBar;
 
         private IGameStateSaver _saver;
         private PlayerData _data;
+        
         private int _headArmor;
         private int _bodyArmor;
+        
+        [field: SerializeField] public Health.Health Health { get; private set; }
         
         public Weapon CurrentWeapon { get; private set; }
 
         private void OnEnable()
         {
-            _health.TargetHealthChanged += GetHealthInData;
+            Health.TargetHealthChanged += GetHealthInData;
         }
 
         private void Start()
         {
-            _healthBar.GetHealth(_health);
+            _healthBar.GetHealth(Health);
             SetCurrentWeapon(Gun);
         }
 
@@ -53,13 +55,18 @@ namespace Project.Scripts.Player
             _data = data;
 
             //_headArmor = _data.headArmor;
-            //_bodyArmor = _data.bodyArmor;
-            //_health.SetHealthValue(_data.health);
+            //_bodyArmor = _data.headArmor;
+            //Health.SetHealthValue(_data.health);
+        }
+        
+        public void SetHeadArmor(int headArmor)
+        {
+            _headArmor = headArmor;
         }
 
-        public void SetArmor()
+        public void SetBodyArmor(int bodyArmor)
         {
-            
+            _bodyArmor = bodyArmor;
         }
 
         private void GetHealthInData(float health)

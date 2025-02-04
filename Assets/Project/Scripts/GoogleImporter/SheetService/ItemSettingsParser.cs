@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using Project.Scripts.GoogleImporter.SheetService;
 using UnityEngine;
 
 namespace Project.Scripts.GoogleImporter
@@ -19,7 +21,7 @@ namespace Project.Scripts.GoogleImporter
         {
             switch (header)
             {
-                case "ID":
+                case "ID" :
                     _currentItemSettings = new ItemSettings
                     {
                         Id = token
@@ -27,34 +29,55 @@ namespace Project.Scripts.GoogleImporter
                     
                     _gameSettings.Items.Add(_currentItemSettings);
                     break;
-                case "CellCapacity":
-                    _currentItemSettings.CellCapacity = Convert.ToInt32(token);
+                case "CellCapacity" :
+                    _currentItemSettings.CellCapacity = ParseInt(token);
                     break;
-                case "Title":
+                case "Title" :
                     _currentItemSettings.Title = token;
                     break;
-                case "Description":
+                case "Description" :
                     _currentItemSettings.Description = token;
                     break;
-                case "IconName": 
+                case "IconName" : 
                     _currentItemSettings.IconName = token;
                     break;
-                case "ItemCharacteristics":
-                    _currentItemSettings.ItemCharacteristics = token;
+                case "ItemCharacteristics" :
+                    _currentItemSettings.ItemCharacteristics = ParseInt(token);
                     break;
-                case "Weight":
-                    _currentItemSettings.Weight = token;
+                case "Weight" :
+                    _currentItemSettings.Weight = ParseFloat(token);
                     break;
-                case "ClassItem":
+                case "ClassItem" :
                     _currentItemSettings.ClassItem = token;
                     break;
-                case "Specialization":
-                    Debug.Log(_currentItemSettings.Specialization);
+                case "Specialization" :
                     _currentItemSettings.Specialization = token;
                     break;
                 default:
                     throw new Exception($"Invalid header: {header}");
             }
+        }
+        
+        private int ParseInt(string s)
+        {
+            int result = -1;
+            if (!int.TryParse(s, NumberStyles.Integer, CultureInfo.GetCultureInfo("en-US"), out result))
+            {
+                Debug.Log("Can't parse int, wrong text");
+            }
+
+            return result;
+        }
+    
+        private float ParseFloat(string s)
+        {
+            float result = -1;
+            if (!float.TryParse(s, NumberStyles.Float, CultureInfo.GetCultureInfo("en-US"), out result))
+            {
+                Debug.Log("Can't pars float,wrong text ");
+            }
+
+            return result;
         }
     }
 }

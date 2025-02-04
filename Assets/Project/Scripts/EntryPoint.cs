@@ -19,6 +19,7 @@ namespace Project.Scripts
         private readonly IconsOfItemsDictionaryData _iconsOfItemsDictionaryData = new ();
 
         [SerializeField] private PanelDescriptionView _panelDescriptionView;
+        [SerializeField] private EquipmentView _equipmentView;
         [SerializeField] private ScreenView _screenView;
         [SerializeField] private IconsListImageData _iconsListSprites;
         [SerializeField] private InputHandler _inputHandler;
@@ -30,6 +31,7 @@ namespace Project.Scripts
 
         private InventoryService _inventoryService;
         private ScreenController _screenController;
+        private PanelDescriptionController _panelDescriptionController;
         private GameStateProvider _gameStateProvider;
         private string _currentOwnerId;
 
@@ -44,6 +46,7 @@ namespace Project.Scripts
         {
             _gunButton.onClick.RemoveListener(OnSetGun);
             _machineGunButton.onClick.RemoveListener(OnSetMachineGun);
+            _panelDescriptionController.Dispose();
         }
 
         private void Start()
@@ -51,15 +54,14 @@ namespace Project.Scripts
             _iconsOfItemsDictionaryData.GetDataOfSprites(_iconsListSprites.Keys, _iconsListSprites.Icons);
 
             _gameStateProvider = new GameStateProvider(_storageService);
-            
             _gameStateProvider.LoadGameState();
 
             _inventoryService = new InventoryService(_gameStateProvider);
             
-            PanelDescriptionController panelDescriptionController =
-                new PanelDescriptionController(_panelDescriptionView, _iconsOfItemsDictionaryData, _inventoryService);
+            _panelDescriptionController = new PanelDescriptionController(_panelDescriptionView,
+                _iconsOfItemsDictionaryData, _inventoryService, _player, _equipmentView);
 
-            _inputHandler.GetPanelDescriptionController(panelDescriptionController);
+            _inputHandler.GetPanelDescriptionController(_panelDescriptionController);
             
             var gameState = _gameStateProvider.GameState;
             

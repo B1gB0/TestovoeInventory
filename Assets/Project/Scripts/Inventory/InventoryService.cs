@@ -24,7 +24,7 @@ namespace Project.Scripts.Inventory
         }
 
         public AddItemsToInventoryGridResult AddItemsToInventory(string ownerId, string itemId, int itemSlotCapacity,
-            string iconName, string description, string itemCharacteristics, string weight, string classItem,
+            string iconName, string description, int itemCharacteristics, float weight, string classItem,
             string title, string specialization, int amount = 1)
         {
             var inventory = _inventoriesMap[ownerId];
@@ -38,7 +38,7 @@ namespace Project.Scripts.Inventory
 
         public AddItemsToInventoryGridResult AddItemsToInventory(
             string ownerId, Vector2Int slotCoords, string itemId, int itemSlotCapacity, string iconName,
-            string description, string itemCharacteristics, string weight, string classItem, string title, 
+            string description, int itemCharacteristics, float weight, string classItem, string title, 
             string specialization, int amount = 1)
         {
             var inventory = _inventoriesMap[ownerId];

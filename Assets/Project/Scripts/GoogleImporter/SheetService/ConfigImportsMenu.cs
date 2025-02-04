@@ -1,4 +1,5 @@
-﻿using Project.Scripts.Storage;
+﻿using Project.Scripts.GoogleImporter.SheetService;
+using Project.Scripts.Storage;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,22 +7,33 @@ namespace Project.Scripts.GoogleImporter
 {
     public class ConfigImportsMenu
     {
-        private const string SpreadSheetId = "1iAaPrtWuk4j_PjGhnbbAaK5NDEr_gaWDcrcMwfLJ-1c";
+        private const int GridId = 0;
+        private const string SpreadSheetId = "1mtWN2IIvnFd4nWerlyEW0tkPRKPIIv3kSc7Hz0_97PM";
         private const string ItemsSheetsName = "InventoryItems";
         private const string SettingsFileName = "GameSettings";
-        private const string CredentialPath = "inventoryconfigs-2a78890166af.json";
+        
+        private const string URLTable =
+            "https://docs.google.com/spreadsheets/d/1mtWN2IIvnFd4nWerlyEW0tkPRKPIIv3kSc7Hz0_97PM/export?format=csv";
+        
         private const string GameSettingsPath = @"D:\Repositoris\TestovoeInventory\Assets\Project\Resources";
 
         private static readonly JsonToFileStorageService _storageService = new();
         
+        [MenuItem("InventoryConfigs/Open Table")]
+        public static void OpenUrl()
+        {
+            Application.OpenURL($"https://docs.google.com/spreadsheets/d/{SpreadSheetId}/edit#gid={GridId}");
+        }
+        
         [MenuItem("InventoryConfigs/Import Items Settings")]
         private static async void LoadItemsSettings()
         {
-            var sheetsImporter = new GoogleSheetsImporter(CredentialPath, SpreadSheetId);
+            var CSVLoader = new CSVLoader();
+            
             var gameSettings = LoadSettings();
             
             var itemsParser = new ItemSettingsParser(gameSettings);
-            await sheetsImporter.DownloadAndParseSheet(ItemsSheetsName, itemsParser);
+            await CSVLoader.DownloadRawCsvTable(URLTable, ItemsSheetsName, itemsParser);
 
             var jsonForSaving = JsonUtility.ToJson(gameSettings);
             _storageService.Save(SettingsFileName, GameSettingsPath, gameSettings);
