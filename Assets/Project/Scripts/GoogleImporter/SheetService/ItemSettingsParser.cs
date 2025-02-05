@@ -26,7 +26,7 @@ namespace Project.Scripts.GoogleImporter
                     {
                         Id = token
                     };
-                    
+
                     _gameSettings.Items.Add(_currentItemSettings);
                     break;
                 case "CellCapacity" :

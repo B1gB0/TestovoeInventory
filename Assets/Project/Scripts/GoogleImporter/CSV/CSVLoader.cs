@@ -34,12 +34,15 @@ public class CSVLoader
         }
         else
         {
-            char lineEnding = '\r';
-            string[] rows = request.downloadHandler.text.Split(lineEnding);
+            string firstLineEnding = "\n";
+            string secondLineEnding = "\r";
+
+            string text = request.downloadHandler.text.Replace(firstLineEnding, "");
+            string[] rows = text.Split(secondLineEnding);
 
             var firstRow = rows[0];
             string[] cellsInFirstRow = rows[0].Split(CellSeporator);
-            
+
             foreach (var cell in cellsInFirstRow)
             {
                 _headers.Add(cell);
@@ -59,8 +62,6 @@ public class CSVLoader
                     var header = _headers[j];
 
                     parser.Parse(header, cell);
-                    
-                    Debug.Log(header);
 
                     Debug.Log($"Header: {header}, value: {cell}");
                 }
@@ -68,14 +69,5 @@ public class CSVLoader
                 
             Debug.Log($"Sheet parsed successfully");
         }
-    }
-    
-    private char GetPlatformSpecificLineEnd()
-    {
-        char lineEnding = '\n';
-#if UNITY_IOS
-        lineEnding = '\r';
-#endif
-        return lineEnding;
     }
 }

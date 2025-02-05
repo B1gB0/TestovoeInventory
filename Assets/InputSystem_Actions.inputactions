@@ -519,7 +519,7 @@
                     "name": "Click",
                     "type": "PassThrough",
                     "id": "3c7022bf-7922-4f7c-a998-c437916075ad",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1002,9 +1002,9 @@
                     "name": "",
                     "id": "5e1650a8-c498-4855-aebd-adef4b85c36e",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "LeftButtonClick",
                     "isComposite": false,
                     "isPartOfComposite": false

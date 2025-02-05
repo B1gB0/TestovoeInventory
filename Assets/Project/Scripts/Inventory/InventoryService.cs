@@ -23,6 +23,12 @@ namespace Project.Scripts.Inventory
             return inventory;
         }
 
+        public void SwitchInventoryItems(string ownerId, Vector2Int slotCoordsA, Vector2Int slotCoordsB)
+        {
+            var inventory = _inventoriesMap[ownerId];
+            inventory.SwitchSlots(slotCoordsA, slotCoordsB);
+        }
+
         public AddItemsToInventoryGridResult AddItemsToInventory(string ownerId, string itemId, int itemSlotCapacity,
             string iconName, string description, int itemCharacteristics, float weight, string classItem,
             string title, string specialization, int amount = 1)
@@ -30,9 +36,7 @@ namespace Project.Scripts.Inventory
             var inventory = _inventoriesMap[ownerId];
             var result = inventory.AddItem(itemId, itemSlotCapacity, iconName, description, itemCharacteristics,
                 weight, classItem, title, specialization, amount);
-            
-            _gameStateSaver.SaveGameState();
-            
+
             return result;
         }
 
@@ -44,19 +48,16 @@ namespace Project.Scripts.Inventory
             var inventory = _inventoriesMap[ownerId];
             var result = inventory.AddItem(slotCoords, itemId, itemSlotCapacity, iconName, description, itemCharacteristics, 
                 weight,  classItem, title, specialization, amount);
-            
-            _gameStateSaver.SaveGameState();
-            
+
             return result;
         }
 
         public RemoveItemsFromInventoryGridResult RemoveItemFromInventory(string ownerId, string itemId, int amount = 1)
         {
             var inventory = _inventoriesMap[ownerId];
+            Debug.Log(itemId);
             var result = inventory.RemoveItem(itemId, amount);
-            
-            _gameStateSaver.SaveGameState();
-            
+
             return result;
         }
 
@@ -65,9 +66,7 @@ namespace Project.Scripts.Inventory
         {
             var inventory = _inventoriesMap[ownerId];
             var result = inventory.RemoveItem(slotCoords, itemId, amount);
-            
-            _gameStateSaver.SaveGameState();
-            
+
             return result;
         }
         

@@ -25,7 +25,7 @@ namespace Project.Scripts.Inventory.Controllers
             var inventoryView = _view.InventoryView;
 
             _currentInventoryController = new InventoryGridController(inventory, inventoryView,
-                _iconsOfItemsDictionaryData, _inventoryService);
+                _iconsOfItemsDictionaryData);
         }
     }
 }

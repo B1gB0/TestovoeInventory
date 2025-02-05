@@ -8,13 +8,13 @@ namespace Project.Scripts.Inventory.Controllers
     public class PanelDescriptionController : IDisposable
     {
         private const string PlayerOwner = "Player";
-        
         private const string Armor = "Armor";
         private const string Ammo = "Ammo";
         private const string Medicine = "Medicine";
         private const string Equip = "Экипировать";
         private const string Heal = "Лечить";
         private const string Buy = "Купить";
+        
         private const string Body = nameof(Body);
         private const string Head = nameof(Head);
         
@@ -22,20 +22,22 @@ namespace Project.Scripts.Inventory.Controllers
         private readonly IconsOfItemsDictionaryData _iconsData;
         private readonly InventoryService _inventoryService;
         private readonly Player.Player _player;
-        private readonly EquipmentView _equipmentView;
+        private readonly EquipmentController _equipmentController;
+        private readonly IGameStateProvider _gameStateProvider;
         
         private InventorySlotView _slot;
         private string _useButtonText;
 
         public PanelDescriptionController(PanelDescriptionView panelDescriptionView,
             IconsOfItemsDictionaryData iconsData, InventoryService inventoryService, Player.Player player,
-            EquipmentView equipmentView)
+            EquipmentView equipmentView, Equipment equipment, IGameStateProvider gameStateProvider)
         {
             _panelDescriptionView = panelDescriptionView;
             _iconsData = iconsData;
             _inventoryService = inventoryService;
             _player = player;
-            _equipmentView = equipmentView;
+            _equipmentController = new EquipmentController(equipment, equipmentView, iconsData, inventoryService, gameStateProvider);
+            _gameStateProvider = gameStateProvider;
         }
 
         public void OnShowView(InventorySlotView slot)
@@ -70,18 +72,25 @@ namespace Project.Scripts.Inventory.Controllers
 
         private void OnEquipButtonClicked()
         {
-            Debug.Log(_slot.Specialization);
             if (_slot.Specialization == Body)
             {
-                Debug.Log(_slot.Specialization);
                 _player.SetBodyArmor(_slot.Characteristics);
-                _equipmentView.SetBodyArmor(_slot.Characteristics, _iconsData.Icons[_slot.IconName]);
+                
+                _equipmentController.OnChangedBodyArmor(_slot.ItemId, _slot.Capacity, _slot.IconName, 
+                    _slot.Description, _slot.Characteristics, _slot.Weight, _slot.ClassItem, _slot.Title, 
+                    _slot.Specialization, _slot.Capacity);
+                
+                RemoveItem();
             }
             else if(_slot.Specialization == Head)
             {
-                Debug.Log(_slot.Specialization);
                 _player.SetHeadArmor(_slot.Characteristics);
-                _equipmentView.SetHeadArmor(_slot.Characteristics, _iconsData.Icons[_slot.IconName]);
+                
+                _equipmentController.OnChangedHeadArmor(_slot.ItemId, _slot.Capacity, _slot.IconName, 
+                    _slot.Description, _slot.Characteristics, _slot.Weight, _slot.ClassItem, _slot.Title, 
+                    _slot.Specialization, _slot.Capacity);
+                
+                RemoveItem();
             }
         }
 
@@ -99,25 +108,19 @@ namespace Project.Scripts.Inventory.Controllers
         
         private void OnDeleteButtonClicked()
         {
+            RemoveItem();
+        }
+
+        private void RemoveItem()
+        {
             _inventoryService.RemoveItemFromInventory(PlayerOwner, _slot.ItemId, _slot.Amount);
         }
 
         public void Dispose()
         {
-            switch (_slot.ClassItem)
-            {
-                case Armor:
-                    _panelDescriptionView.UseButton.onClick.RemoveListener(OnEquipButtonClicked);
-                    break;
-                case Medicine:
-                    _panelDescriptionView.UseButton.onClick.RemoveListener(OnHealButtonClicked);
-                    break;
-                case Ammo:
-                    _panelDescriptionView.UseButton.onClick.RemoveListener(OnBuyButtonClicked);
-                    break;
-            }
-
-
+            _panelDescriptionView.UseButton.onClick.RemoveListener(OnEquipButtonClicked);
+            _panelDescriptionView.UseButton.onClick.RemoveListener(OnHealButtonClicked);
+            _panelDescriptionView.UseButton.onClick.RemoveListener(OnBuyButtonClicked);
             _panelDescriptionView.CloseButton.onClick.RemoveListener(Dispose);
             _panelDescriptionView.DeleteButton.onClick.RemoveListener(OnDeleteButtonClicked);
         }

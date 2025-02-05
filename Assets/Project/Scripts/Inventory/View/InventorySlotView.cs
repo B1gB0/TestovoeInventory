@@ -1,11 +1,13 @@
-﻿using Project.Scripts.Inventory.Data;
+﻿using System;
+using Project.Scripts.Inventory.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Project.Scripts.Inventory.View
 {
-    public class InventorySlotView : MonoBehaviour
+    public class InventorySlotView : MonoBehaviour, IDropHandler
     {
         private const int Null = 0;
         private const int MinValue = 1;
@@ -13,31 +15,28 @@ namespace Project.Scripts.Inventory.View
         [SerializeField] private TMP_Text _titleText;
         [SerializeField] private TMP_Text _amountText;
         [SerializeField] private Image _icon;
-        
+
         private IconsOfItemsDictionaryData _iconsOfItemsData;
         private InventoryService _inventoryService;
 
         public string Description { get; private set; }
-        
         public string ItemId { get; private set; }
-        
         public string Title { get; private set; }
-        
         public string ClassItem { get; private set; }
-        
         public int Characteristics { get; private set; }
-        
         public float Weight { get; private set; }
-        
         public int Capacity { get; private set; }
-        
         public int Amount { get; private set; }
-
         public string Specialization { get; private set; }
-        
         public string IconName { get; private set; }
-
         public Sprite Sprite => _icon.sprite;
+        
+        public void OnDrop(PointerEventData eventData)
+        {
+            var otherItemTransform = eventData.pointerDrag.transform;
+            otherItemTransform.SetParent(transform);
+            otherItemTransform.localPosition = Vector3.zero;
+        }
 
         public void GetData(IconsOfItemsDictionaryData iconsOfItemsData)
         {
@@ -72,7 +71,6 @@ namespace Project.Scripts.Inventory.View
             ClassItem = classItem;
             Title = title;
             Specialization = specialization;
-            Debug.Log(specialization);
         }
 
         public void SetCapacity(int capacity)

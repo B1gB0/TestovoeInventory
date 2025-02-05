@@ -21,11 +21,15 @@ namespace Project.Scripts.Inventory.View
 
         private void OnEnable()
         {
+            UseButton.onClick.AddListener(Hide);
+            DeleteButton.onClick.AddListener(Hide);
             CloseButton.onClick.AddListener(Hide);
         }
 
         private void OnDisable()
         {
+            UseButton.onClick.RemoveListener(Hide);
+            DeleteButton.onClick.RemoveListener(Hide);
             CloseButton.onClick.RemoveListener(Hide);
         }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IView
 {
-    public virtual void Show() { }
-    
-    public virtual void Hide() { }
+    public void Show() { }
+
+    public void Hide() { } 
 }

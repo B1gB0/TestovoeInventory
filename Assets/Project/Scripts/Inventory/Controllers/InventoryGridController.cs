@@ -11,7 +11,7 @@ namespace Project.Scripts.Inventory.Controllers
         private readonly List<InventorySlotController> _slotControllers = new();
 
         public InventoryGridController(IReadOnlyInventoryGrid inventory, InventoryView view,
-            IconsOfItemsDictionaryData iconsOfItemsDictionaryData, InventoryService inventoryService)
+            IconsOfItemsDictionaryData iconsOfItemsDictionaryData)
         {
             _iconsOfItemsDictionaryData = iconsOfItemsDictionaryData;
 

@@ -2,9 +2,13 @@
 {
     public class Gun : Weapon
     {
-        public override void Shoot(Health.Health health, int damage, int armor)
+        private const int Damage = 5;
+        
+        public Gun(Weapons type) : base(type) { }
+        
+        public override void Shoot(Health.Health health)
         {
-            health.TakeDamage(damage - armor);
+            health.TakeDamage(Damage);
         }
     }
 }

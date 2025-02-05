@@ -4,6 +4,13 @@ namespace Project.Scripts.Weapons
 {
     public abstract class Weapon
     {
-        public abstract void Shoot(Health.Health health, int damage, int armor);
+        public Weapon(Weapons type)
+        {
+            Type = type;
+        }
+        
+        public Weapons Type { get; }
+        
+        public abstract void Shoot(Health.Health health);
     }
 }

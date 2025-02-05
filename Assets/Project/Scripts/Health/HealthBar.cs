@@ -1,34 +1,27 @@
-﻿namespace Project.Scripts.Health
+﻿using System;
+
+namespace Project.Scripts.Health
 {
-    public class HealthBar : Bar
+    public class HealthBar : Bar, IDisposable
     {
         private Health _health;
 
-        public void GetHealth(Health health)
+        public void Construct(Health health)
         {
             _health = health;
-        }
-
-        private void OnEnable()
-        {
-            _health.Die += OnDie;
             _health.HealthChanged += OnChangedValues;
-        }
-
-        private void OnDisable()
-        {
-            _health.Die -= OnDie;
-            _health.HealthChanged -= OnChangedValues;
-        }
-
-        private void OnDie()
-        {
-            Hide();
+            
+            Show();
         }
 
         private void OnChangedValues(float currentHealth, float maxHealth, float targetHealth)
         {
             SetValues(currentHealth, maxHealth, targetHealth);
+        }
+
+        public void Dispose()
+        {
+            _health.HealthChanged -= OnChangedValues;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Project.Scripts.GoogleImporter;
 using Project.Scripts.GoogleImporter.SheetService;
 using Project.Scripts.Storage;
 using UnityEngine;
@@ -56,7 +57,11 @@ namespace Project.Scripts.Inventory.Data
                 Inventories = new List<InventoryGridData>
                 {
                     CreateTestInventory("Player")
-                }
+                },
+                
+                EquipmentData = new EquipmentData(),
+                PlayerData = new PlayerData(),
+                EnemyData = new EnemyData()
             };
 
             return gameState;
