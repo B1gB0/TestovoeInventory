@@ -32,6 +32,7 @@ namespace Project.Scripts
             
             SetCurrentWeapon(Gun);
         }
+        
         public void SetMaxHealth()
         {
             GetHealthInData(MaxHealth);
@@ -56,10 +57,10 @@ namespace Project.Scripts
             
             if (_data.Health <= 0)
             {
-                GetHealthInData(MaxHealth);
+                _data.Health = MaxHealth;
+                Health.SetHealthValue(MaxHealth);
             }
-
-            if (_data.Health != Health.TargetHealth)
+            else
             {
                 Health.SetHealthValue(_data.Health);
             }

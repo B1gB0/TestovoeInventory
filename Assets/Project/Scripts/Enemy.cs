@@ -1,5 +1,4 @@
-﻿using Project.Scripts.GoogleImporter;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Scripts
 {
@@ -39,10 +38,10 @@ namespace Project.Scripts
 
             if (_data.Health <= 0)
             {
-                GetHealthInData(MaxHealth);
+                _data.Health = MaxHealth;
+                Health.SetHealthValue(MaxHealth);
             }
-            
-            if (_data.Health != Health.TargetHealth)
+            else
             {
                 Health.SetHealthValue(_data.Health);
             }

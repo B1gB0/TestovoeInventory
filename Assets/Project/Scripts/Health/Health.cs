@@ -15,22 +15,17 @@ namespace Project.Scripts.Health
         private float _currentHealth;
 
         public event Action Die;
-
         public event Action<float, float, float> HealthChanged;
-
         public event Action<float> TargetHealthChanged;
 
         public float MaxHealth { get; private set; }
-
         public float TargetHealth { get; private set; }
 
         private void Start()
         {
             MaxHealth = _value;
-            TargetHealth = _value;
             _currentHealth = _value;
             
-            TargetHealthChanged?.Invoke(TargetHealth);
             HealthChanged?.Invoke(_currentHealth, TargetHealth, MaxHealth);
         }
 
