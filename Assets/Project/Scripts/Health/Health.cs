@@ -24,8 +24,6 @@ namespace Project.Scripts.Health
 
         public float TargetHealth { get; private set; }
 
-        public bool IsHitting { get; private set; }
-
         private void Start()
         {
             MaxHealth = _value;
@@ -68,11 +66,6 @@ namespace Project.Scripts.Health
             TargetHealth = value;
 
             OnChangeHealth();
-        }
-
-        public void SetHit(bool isHitting)
-        {
-            IsHitting = isHitting;
         }
 
         private void OnChangeHealth()

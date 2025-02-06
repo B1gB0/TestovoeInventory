@@ -1,8 +1,9 @@
-using UnityEngine;
-
-public interface IView
+namespace Project.Scripts.Inventory.View
 {
-    public void Show() { }
+    public interface IView
+    {
+        public void Show() { }
 
-    public void Hide() { } 
+        public void Hide() { } 
+    }
 }

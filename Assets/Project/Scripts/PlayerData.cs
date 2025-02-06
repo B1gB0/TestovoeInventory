@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Project.Scripts.Inventory.Data
+namespace Project.Scripts
 {
     [Serializable]
     public class PlayerData

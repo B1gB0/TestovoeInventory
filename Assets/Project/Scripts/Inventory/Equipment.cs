@@ -1,5 +1,4 @@
-﻿using System;
-using Project.Scripts.Inventory.Data;
+﻿using Project.Scripts.Inventory.Data;
 
 namespace Project.Scripts.Inventory
 {

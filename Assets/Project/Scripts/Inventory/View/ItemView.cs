@@ -24,8 +24,6 @@ namespace Project.Scripts.Inventory.View
         
         public void OnBeginDrag(PointerEventData eventData)
         {
-            //eventData.useDragThreshold = true;
-            
             InventorySlotView slot = eventData.pointerDrag.GetComponentInParent<InventorySlotView>();
             _firstSlot = slot.Position;
             Debug.Log(_firstSlot);

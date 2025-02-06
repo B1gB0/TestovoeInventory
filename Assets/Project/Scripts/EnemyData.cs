@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Project.Scripts.GoogleImporter
+namespace Project.Scripts
 {
     [Serializable]
     public class EnemyData

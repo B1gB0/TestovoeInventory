@@ -1,6 +1,6 @@
 using System;
 
-namespace Project.Scripts.ReadOnly
+namespace Project.Scripts.Inventory.ReadOnly
 {
     public interface IReadOnlyInventory
     {

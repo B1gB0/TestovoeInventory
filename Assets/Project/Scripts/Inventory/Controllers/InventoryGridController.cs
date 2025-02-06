@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Project.Scripts.Inventory.Data;
+using Project.Scripts.Inventory.ReadOnly;
 using Project.Scripts.Inventory.View;
-using Project.Scripts.ReadOnly;
 
 namespace Project.Scripts.Inventory.Controllers
 {

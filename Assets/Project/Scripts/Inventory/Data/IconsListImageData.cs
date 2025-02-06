@@ -7,7 +7,6 @@ namespace Project.Scripts.Inventory.Data
     public class IconsListImageData : ScriptableObject
     {
         [field: SerializeField] public List<Sprite> Icons { get; private set; }
-        
         [field: SerializeField] public List<string> Keys { get; private set; }
     }
 }

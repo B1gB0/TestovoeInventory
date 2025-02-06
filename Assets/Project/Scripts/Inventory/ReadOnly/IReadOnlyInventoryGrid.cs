@@ -1,8 +1,7 @@
 using System;
-using Project.Scripts.Inventory.ReadOnly;
 using UnityEngine;
 
-namespace Project.Scripts.ReadOnly
+namespace Project.Scripts.Inventory.ReadOnly
 {
     public interface IReadOnlyInventoryGrid : IReadOnlyInventory
     {

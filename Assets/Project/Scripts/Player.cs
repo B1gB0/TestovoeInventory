@@ -3,7 +3,7 @@ using Project.Scripts.Inventory.Data;
 using Project.Scripts.Weapons;
 using UnityEngine;
 
-namespace Project.Scripts.Player
+namespace Project.Scripts
 {
     public class Player : MonoBehaviour
     {
@@ -37,7 +37,7 @@ namespace Project.Scripts.Player
             GetHealthInData(MaxHealth);
         }
 
-        public void Fire(Enemy.Enemy enemy)
+        public void Fire(Enemy enemy)
         {
             CurrentWeapon.Shoot(enemy.Health);
         }
@@ -52,7 +52,7 @@ namespace Project.Scripts.Player
             _data = data;
 
             HeadArmor = data.HeadArmor;
-            BodyArmor = data.HeadArmor;
+            BodyArmor = data.BodyArmor;
             
             if (_data.Health <= 0)
             {

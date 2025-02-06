@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Project.Scripts.GoogleImporter;
-using Project.Scripts.GoogleImporter.SheetService;
 using Project.Scripts.Storage;
 using UnityEngine;
 
@@ -10,8 +9,7 @@ namespace Project.Scripts.Inventory.Data
     {
         private const string GameStateKey = "GameState";
         private const string GameSettingsKey = "GameSettings";
-        private const string GameSettingsPath = @"D:\Repositoris\TestovoeInventory\Assets\Project\Resources";
-        
+
         private const int Columns = 6;
         private const int Rows = 5;
         
@@ -23,9 +21,7 @@ namespace Project.Scripts.Inventory.Data
         }
 
         public GameStateData GameState { get; private set; }
-        
         public GameSettings GameSettings { get; private set; }
-
         public Dictionary<string, ItemSettings> Items { get; private set; } = new();
 
         public void SaveGameState()
@@ -40,7 +36,7 @@ namespace Project.Scripts.Inventory.Data
                 GameState = data;
             });
             
-            _storageService.Load<GameSettings>(GameSettingsKey, GameSettingsPath, data =>
+            _storageService.Load<GameSettings>(GameSettingsKey, Application.persistentDataPath, data =>
             {
                 GameSettings = data;
 
@@ -117,7 +113,6 @@ namespace Project.Scripts.Inventory.Data
             
              for (int i = 0; i < GameSettings.Items.Count; i++)
              {
-                 
                  items.Add(new InventorySlotData()
                  {
                      ItemId = GameSettings.Items[i].Id,

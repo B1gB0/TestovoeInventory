@@ -23,7 +23,7 @@ namespace Project.Scripts.Inventory.Controllers
         private readonly PanelDescriptionView _panelDescriptionView;
         private readonly IconsOfItemsDictionaryData _iconsData;
         private readonly InventoryService _inventoryService;
-        private readonly Player.Player _player;
+        private readonly Player _player;
         private readonly EquipmentController _equipmentController;
         private readonly IGameStateProvider _gameStateProvider;
 
@@ -31,7 +31,7 @@ namespace Project.Scripts.Inventory.Controllers
         private string _useButtonText;
 
         public PanelDescriptionController(PanelDescriptionView panelDescriptionView,
-            IconsOfItemsDictionaryData iconsData, InventoryService inventoryService, Player.Player player,
+            IconsOfItemsDictionaryData iconsData, InventoryService inventoryService, Player player,
             EquipmentView equipmentView, Equipment equipment, IGameStateProvider gameStateProvider)
         {
             _panelDescriptionView = panelDescriptionView;

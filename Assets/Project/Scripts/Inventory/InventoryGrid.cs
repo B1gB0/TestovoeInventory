@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Project.Scripts.Inventory.Data;
 using Project.Scripts.Inventory.ReadOnly;
 using UnityEngine;
-using Project.Scripts.ReadOnly;
 
 namespace Project.Scripts.Inventory
 {

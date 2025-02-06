@@ -34,8 +34,8 @@ namespace Project.Scripts
         [SerializeField] private IconsListImageData _iconsListSprites;
         [SerializeField] private InputHandler _inputHandler;
         
-        [SerializeField] private Player.Player _player;
-        [SerializeField] private Enemy.Enemy _enemy;
+        [SerializeField] private Player _player;
+        [SerializeField] private Enemy _enemy;
 
         [SerializeField] private Button _rebornButton;
         [SerializeField] private Button _gunButton;

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Project.Scripts.Inventory.Data;
-using Project.Scripts.ReadOnly;
+using Project.Scripts.Inventory.ReadOnly;
 using UnityEngine;
 
 namespace Project.Scripts.Inventory

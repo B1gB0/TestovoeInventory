@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Project.Scripts.Inventory.View;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

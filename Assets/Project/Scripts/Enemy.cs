@@ -1,10 +1,7 @@
-﻿using System;
-using Project.Scripts.GoogleImporter;
-using Project.Scripts.Health;
-using Project.Scripts.Inventory.Data;
+﻿using Project.Scripts.GoogleImporter;
 using UnityEngine;
 
-namespace Project.Scripts.Enemy
+namespace Project.Scripts
 {
     public class Enemy : MonoBehaviour
     {
@@ -22,7 +19,7 @@ namespace Project.Scripts.Enemy
             Health.Die += SetMaxHealth;
         }
 
-        public void AttackPlayer(Player.Player player)
+        public void AttackPlayer(Player player)
         {
             if (_counter == 0)
             {
