@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Project.Scripts.Inventory.Data
 {
@@ -15,5 +16,6 @@ namespace Project.Scripts.Inventory.Data
         public string ClassItem;
         public string Title;
         public string Specialization;
+        public Vector2Int Position;
     }
 }

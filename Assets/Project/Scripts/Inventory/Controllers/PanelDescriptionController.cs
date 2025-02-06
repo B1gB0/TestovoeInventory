@@ -1,7 +1,7 @@
 ﻿using System;
+using Project.Scripts.GoogleImporter;
 using Project.Scripts.Inventory.Data;
 using Project.Scripts.Inventory.View;
-using UnityEngine;
 
 namespace Project.Scripts.Inventory.Controllers
 {
@@ -14,6 +14,8 @@ namespace Project.Scripts.Inventory.Controllers
         private const string Equip = "Экипировать";
         private const string Heal = "Лечить";
         private const string Buy = "Купить";
+
+        private const int Amount = 1;
         
         private const string Body = nameof(Body);
         private const string Head = nameof(Head);
@@ -24,7 +26,7 @@ namespace Project.Scripts.Inventory.Controllers
         private readonly Player.Player _player;
         private readonly EquipmentController _equipmentController;
         private readonly IGameStateProvider _gameStateProvider;
-        
+
         private InventorySlotView _slot;
         private string _useButtonText;
 
@@ -36,7 +38,9 @@ namespace Project.Scripts.Inventory.Controllers
             _iconsData = iconsData;
             _inventoryService = inventoryService;
             _player = player;
-            _equipmentController = new EquipmentController(equipment, equipmentView, iconsData, inventoryService, gameStateProvider);
+            
+            _equipmentController = new EquipmentController(equipment, equipmentView, iconsData, inventoryService,
+                gameStateProvider);
             _gameStateProvider = gameStateProvider;
         }
 
@@ -44,10 +48,10 @@ namespace Project.Scripts.Inventory.Controllers
         {
             if(slot.ItemId == null)
                 return;
+            
+            Dispose();
 
             _slot = slot;
-            Debug.Log(slot.ClassItem);
-            Debug.Log(_slot.ClassItem);
 
             switch (slot.ClassItem)
             {
@@ -65,9 +69,16 @@ namespace Project.Scripts.Inventory.Controllers
                     break;
             }
             
-            _panelDescriptionView.CloseButton.onClick.AddListener(Dispose);
             _panelDescriptionView.DeleteButton.onClick.AddListener(OnDeleteButtonClicked);
             _panelDescriptionView.Show(slot, _iconsData.Icons[slot.ClassItem], _useButtonText);
+        }
+        
+        public void Dispose()
+        {
+            _panelDescriptionView.UseButton.onClick.RemoveListener(OnEquipButtonClicked);
+            _panelDescriptionView.UseButton.onClick.RemoveListener(OnHealButtonClicked);
+            _panelDescriptionView.UseButton.onClick.RemoveListener(OnBuyButtonClicked);
+            _panelDescriptionView.DeleteButton.onClick.RemoveListener(OnDeleteButtonClicked);
         }
 
         private void OnEquipButtonClicked()
@@ -97,18 +108,21 @@ namespace Project.Scripts.Inventory.Controllers
         private void OnHealButtonClicked()
         {
             _player.Health.AddHealth(_slot.Characteristics);
+            RemoveItemInPosition(Amount);
         }
 
         private void OnBuyButtonClicked()
         {
-            _inventoryService.AddItemsToInventory(PlayerOwner, _slot.ItemId, _slot.Capacity, _slot.IconName, 
-                _slot.Description, _slot.Characteristics, _slot.Weight, _slot.ClassItem, _slot.Title, 
-                _slot.Specialization, _slot.Capacity);
+            ItemSettings item = _gameStateProvider.Items[_slot.ItemId];
+            
+            _inventoryService.AddItemsToInventory(PlayerOwner, item.Id, item.CellCapacity, item.IconName, 
+                item.Description, item.ItemCharacteristics, item.Weight, item.ClassItem, item.Title, 
+                item.Specialization, item.CellCapacity);
         }
         
         private void OnDeleteButtonClicked()
         {
-            RemoveItem();
+            RemoveItemInPosition(_slot.Amount);
         }
 
         private void RemoveItem()
@@ -116,13 +130,9 @@ namespace Project.Scripts.Inventory.Controllers
             _inventoryService.RemoveItemFromInventory(PlayerOwner, _slot.ItemId, _slot.Amount);
         }
 
-        public void Dispose()
+        private void RemoveItemInPosition(int amount)
         {
-            _panelDescriptionView.UseButton.onClick.RemoveListener(OnEquipButtonClicked);
-            _panelDescriptionView.UseButton.onClick.RemoveListener(OnHealButtonClicked);
-            _panelDescriptionView.UseButton.onClick.RemoveListener(OnBuyButtonClicked);
-            _panelDescriptionView.CloseButton.onClick.RemoveListener(Dispose);
-            _panelDescriptionView.DeleteButton.onClick.RemoveListener(OnDeleteButtonClicked);
+            _inventoryService.RemoveItemFromInventory(PlayerOwner, _slot.Position, _slot.ItemId,  amount);
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using Project.Scripts.GoogleImporter.SheetService;
-using Project.Scripts.Storage;
+﻿using Project.Scripts.Storage;
 using UnityEditor;
 using UnityEngine;
 
-namespace Project.Scripts.GoogleImporter
+namespace Project.Scripts.GoogleImporter.SheetService
 {
     public class ConfigImportsMenu
     {

@@ -15,9 +15,16 @@ namespace Project.Scripts.Inventory.View
         [SerializeField] private Image _iconItem;
         [SerializeField] private Image _iconCharacteristics;
 
+        private Camera _camera;
+
         [field: SerializeField] public Button CloseButton { get; private set; }
         [field: SerializeField] public Button UseButton { get; private set; }
         [field: SerializeField] public Button DeleteButton { get; private set; }
+
+        private void Awake()
+        {
+            _camera = Camera.main;
+        }
 
         private void OnEnable()
         {

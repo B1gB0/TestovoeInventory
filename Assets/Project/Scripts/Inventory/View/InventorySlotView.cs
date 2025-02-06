@@ -11,7 +11,7 @@ namespace Project.Scripts.Inventory.View
     {
         private const int Null = 0;
         private const int MinValue = 1;
-        
+
         [SerializeField] private TMP_Text _titleText;
         [SerializeField] private TMP_Text _amountText;
         [SerializeField] private Image _icon;
@@ -29,18 +29,24 @@ namespace Project.Scripts.Inventory.View
         public int Amount { get; private set; }
         public string Specialization { get; private set; }
         public string IconName { get; private set; }
+        public Vector2Int Position { get; private set; }
         public Sprite Sprite => _icon.sprite;
-        
+
         public void OnDrop(PointerEventData eventData)
         {
             var otherItemTransform = eventData.pointerDrag.transform;
-            otherItemTransform.SetParent(transform);
+            
+            ItemView item = eventData.pointerDrag.GetComponent<ItemView>();
+            item.GetInventoryService(_inventoryService);
+            item.GetSecondSlotPosition(Position);
+            
             otherItemTransform.localPosition = Vector3.zero;
         }
 
-        public void GetData(IconsOfItemsDictionaryData iconsOfItemsData)
+        public void GetData(IconsOfItemsDictionaryData iconsOfItemsData, InventoryService inventoryService)
         {
             _iconsOfItemsData = iconsOfItemsData;
+            _inventoryService = inventoryService;
         }
 
         public void SetId(string id)
@@ -81,6 +87,11 @@ namespace Project.Scripts.Inventory.View
         public void HideIcon()
         {
             _icon.gameObject.SetActive(false);
+        }
+
+        public void SetPosition(Vector2Int position)
+        {
+            Position = position;
         }
     }
 }

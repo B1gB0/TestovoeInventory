@@ -260,7 +260,7 @@ SubShader {
 
             #if BEVEL_ON
             float3 dxy = float3(0.5 / _TextureWidth, 0.5 / _TextureHeight, 0);
-            float3 n = GetSurfaceNormal(input.atlas, Weight, dxy);
+            float3 n = GetSurfaceNormal(input.atlas, weight, dxy);
 
             float3 bump = UnpackNormal(tex2D(_BumpMap, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y)).xyz;
             bump *= lerp(_BumpFace, _BumpOutline, saturate(sd + outline * 0.5));
@@ -280,7 +280,7 @@ SubShader {
             #if (UNDERLAY_ON || UNDERLAY_INNER)
             float bScale = scale;
             bScale /= 1 + ((_UnderlaySoftness * _ScaleRatioC) * bScale);
-            float bBias = (0.5 - Weight) * bScale - 0.5 - ((_UnderlayDilate * _ScaleRatioC) * 0.5 * bScale);
+            float bBias = (0.5 - weight) * bScale - 0.5 - ((_UnderlayDilate * _ScaleRatioC) * 0.5 * bScale);
             #endif
 
             #if UNDERLAY_ON

@@ -25,7 +25,9 @@ namespace Project.Scripts.Inventory.Data
         public GameStateData GameState { get; private set; }
         
         public GameSettings GameSettings { get; private set; }
-        
+
+        public Dictionary<string, ItemSettings> Items { get; private set; } = new();
+
         public void SaveGameState()
         {
             _storageService.Save(GameStateKey, Application.persistentDataPath, GameState);
@@ -41,6 +43,11 @@ namespace Project.Scripts.Inventory.Data
             _storageService.Load<GameSettings>(GameSettingsKey, GameSettingsPath, data =>
             {
                 GameSettings = data;
+
+                if (GameSettings != null)
+                {
+                    Debug.Log(GameSettings != null);
+                }
             });
 
             if (GameState != null)
@@ -95,27 +102,37 @@ namespace Project.Scripts.Inventory.Data
             return createdInventoryData;
         }
 
+        public void GetItemsFromGameSettings()
+        {
+            for (int i = 0; i < GameSettings.Items.Count; i++)
+            {
+                Debug.Log(GameSettings != null);
+                Items.Add(GameSettings.Items[i].Id, GameSettings.Items[i]);
+            }
+        }
+
         private List<InventorySlotData> CreateAllItems()
         {
             List<InventorySlotData> items = new List<InventorySlotData>();
-
-            for (int i = 0; i < GameSettings.Items.Count; i++)
-            {
-                items.Add(new InventorySlotData()
-                {
-                    ItemId = GameSettings.Items[i].Id,
-                    Amount = GameSettings.Items[i].CellCapacity,
-                    Capacity = GameSettings.Items[i].CellCapacity,
-                    IconName = GameSettings.Items[i].IconName,
-                    Description = GameSettings.Items[i].Description,
-                    ItemCharacteristics = GameSettings.Items[i].ItemCharacteristics,
-                    Weight = GameSettings.Items[i].Weight,
-                    ClassItem = GameSettings.Items[i].ClassItem,
-                    Title = GameSettings.Items[i].Title,
-                    Specialization = GameSettings.Items[i].Specialization
-                });
-                
-                Debug.Log(GameSettings.Items[i].Specialization);
+            
+             for (int i = 0; i < GameSettings.Items.Count; i++)
+             {
+                 
+                 items.Add(new InventorySlotData()
+                 {
+                     ItemId = GameSettings.Items[i].Id,
+                     Amount = GameSettings.Items[i].CellCapacity,
+                     Capacity = GameSettings.Items[i].CellCapacity,
+                     IconName = GameSettings.Items[i].IconName,
+                     Description = GameSettings.Items[i].Description,
+                     ItemCharacteristics = GameSettings.Items[i].ItemCharacteristics,
+                     Weight = GameSettings.Items[i].Weight,
+                     ClassItem = GameSettings.Items[i].ClassItem,
+                     Title = GameSettings.Items[i].Title,
+                     Specialization = GameSettings.Items[i].Specialization
+                 });
+            
+                 Debug.Log(GameSettings.Items[i].Specialization);
             }
 
             return items;

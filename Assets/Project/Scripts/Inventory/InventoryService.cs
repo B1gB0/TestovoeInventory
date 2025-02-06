@@ -8,12 +8,6 @@ namespace Project.Scripts.Inventory
     public class InventoryService
     {
         private readonly Dictionary<string, InventoryGrid> _inventoriesMap = new();
-        private readonly IGameStateSaver _gameStateSaver;
-
-        public InventoryService(IGameStateSaver gameStateSaver)
-        {
-            _gameStateSaver = gameStateSaver;
-        }
 
         public InventoryGrid RegisterInventory(InventoryGridData inventoryData)
         {
@@ -55,7 +49,6 @@ namespace Project.Scripts.Inventory
         public RemoveItemsFromInventoryGridResult RemoveItemFromInventory(string ownerId, string itemId, int amount = 1)
         {
             var inventory = _inventoriesMap[ownerId];
-            Debug.Log(itemId);
             var result = inventory.RemoveItem(itemId, amount);
 
             return result;

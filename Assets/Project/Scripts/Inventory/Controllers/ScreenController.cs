@@ -1,9 +1,10 @@
-﻿using Project.Scripts.Inventory.Data;
+﻿using System;
+using Project.Scripts.Inventory.Data;
 using Project.Scripts.Inventory.View;
 
 namespace Project.Scripts.Inventory.Controllers
 {
-    public class ScreenController
+    public class ScreenController : IDisposable
     {
         private readonly InventoryService _inventoryService;
         private readonly ScreenView _view;
@@ -25,7 +26,12 @@ namespace Project.Scripts.Inventory.Controllers
             var inventoryView = _view.InventoryView;
 
             _currentInventoryController = new InventoryGridController(inventory, inventoryView,
-                _iconsOfItemsDictionaryData);
+                _iconsOfItemsDictionaryData, _inventoryService);
+        }
+
+        public void Dispose()
+        {
+            _currentInventoryController?.Dispose();
         }
     }
 }

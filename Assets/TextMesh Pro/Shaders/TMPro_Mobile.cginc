@@ -16,7 +16,7 @@ struct pixel_t
     float4	faceColor		: COLOR;
     float4	outlineColor	: COLOR1;
     float4	texcoord0		: TEXCOORD0;
-    float4	param			: TEXCOORD1;		// x = Weight, y = no longer used
+    float4	param			: TEXCOORD1;		// x = weight, y = no longer used
     float2	mask			: TEXCOORD2;
     #if (UNDERLAY_ON || UNDERLAY_INNER)
     float4	texcoord2		: TEXCOORD3;

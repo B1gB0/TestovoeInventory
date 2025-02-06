@@ -1,4 +1,5 @@
-﻿using Project.Scripts.Inventory.Data;
+﻿using Project.Scripts.GoogleImporter;
+using Project.Scripts.Inventory.Data;
 using Project.Scripts.Inventory.View;
 
 namespace Project.Scripts.Inventory.Controllers
@@ -12,7 +13,7 @@ namespace Project.Scripts.Inventory.Controllers
         private readonly Equipment _equipment;
         private readonly InventoryService _inventoryService;
         private readonly IGameStateProvider _gameStateProvider;
-        
+
         public EquipmentController(Equipment equipment, EquipmentView view, IconsOfItemsDictionaryData icons,
             InventoryService inventoryService, IGameStateProvider gameStateProvider)
         {
@@ -22,28 +23,32 @@ namespace Project.Scripts.Inventory.Controllers
             _inventoryService = inventoryService;
             _gameStateProvider = gameStateProvider;
 
-            OnChangedBodyArmor(equipment.BodyArmorId, equipment.BodyCapacity, equipment.BodyArmorIconName, 
-                equipment.BodyDescription, equipment.BodyArmorCharacteristics, equipment.BodyWeight,
-                equipment.BodyClassItem, equipment.BodyTitle, equipment.BodySpecialization, equipment.BodyAmount);
-            
-            OnChangedHeadArmor(equipment.HeadArmorId, equipment.HeadCapacity, equipment.HeadArmorIconName,
-                equipment.HeadDescription, equipment.HeadArmorCharacteristics, equipment.HeadWeight,
-                equipment.HeadClassItem, equipment.HeadTitle, equipment.HeadSpecialization, equipment.HeadAmount);
+            if (_equipment.BodyArmorId != null)
+            {
+                OnChangedBodyArmor(equipment.BodyArmorId, equipment.BodyCapacity, equipment.BodyArmorIconName, 
+                    equipment.BodyDescription, equipment.BodyArmorCharacteristics, equipment.BodyWeight,
+                    equipment.BodyClassItem, equipment.BodyTitle, equipment.BodySpecialization, equipment.BodyAmount);
+            }
+
+            if (_equipment.HeadArmorId != null)
+            {
+                OnChangedHeadArmor(equipment.HeadArmorId, equipment.HeadCapacity, equipment.HeadArmorIconName,
+                    equipment.HeadDescription, equipment.HeadArmorCharacteristics, equipment.HeadWeight,
+                    equipment.HeadClassItem, equipment.HeadTitle, equipment.HeadSpecialization, equipment.HeadAmount);
+            }
         }
 
         public void OnChangedBodyArmor(string itemId, int itemSlotCapacity,
             string iconName, string description, int itemCharacteristics, float weight, string classItem,
             string title, string specialization, int amount)
         {
-            if(string.IsNullOrEmpty(itemId))
-                return;
-
-            if (_equipment.BodyArmorId != itemId)
+            if (_equipment.BodyArmorId != null)
             {
-                _inventoryService.AddItemsToInventory(PlayerOwner, _equipment.BodyArmorId, _equipment.BodyCapacity,
-                    _equipment.BodyArmorIconName, _equipment.BodyDescription, _equipment.BodyArmorCharacteristics, 
-                    _equipment.BodyWeight, _equipment.BodyClassItem, _equipment.BodyTitle, _equipment.BodySpecialization,
-                    _equipment.BodyAmount);
+                ItemSettings item = _gameStateProvider.Items[_equipment.BodyArmorId];
+            
+                _inventoryService.AddItemsToInventory(PlayerOwner, item.Id, item.CellCapacity, item.IconName, 
+                    item.Description, item.ItemCharacteristics, item.Weight, item.ClassItem, item.Title, 
+                    item.Specialization, item.CellCapacity);
             }
             
             _equipment.GetDataOfBodyArmor(itemId, itemSlotCapacity, iconName, description, itemCharacteristics, weight,
@@ -55,15 +60,13 @@ namespace Project.Scripts.Inventory.Controllers
             string iconName, string description, int itemCharacteristics, float weight, string classItem,
             string title, string specialization, int amount = 1)
         {
-            if(string.IsNullOrEmpty(itemId))
-                return;
-            
-            if (_equipment.HeadArmorId != itemId)
+            if (_equipment.HeadArmorId != null)
             {
-                _inventoryService.AddItemsToInventory(PlayerOwner, _equipment.HeadArmorId, _equipment.HeadCapacity,
-                    _equipment.HeadArmorIconName, _equipment.HeadDescription, _equipment.HeadArmorCharacteristics, 
-                    _equipment.HeadWeight, _equipment.HeadClassItem, _equipment.HeadTitle, _equipment.HeadSpecialization,
-                    _equipment.HeadAmount);
+                ItemSettings item = _gameStateProvider.Items[_equipment.HeadArmorId];
+            
+                _inventoryService.AddItemsToInventory(PlayerOwner, item.Id, item.CellCapacity, item.IconName, 
+                    item.Description, item.ItemCharacteristics, item.Weight, item.ClassItem, item.Title, 
+                    item.Specialization, item.CellCapacity);
             }
             
             _equipment.GetDataOfHeadArmor(itemId, itemSlotCapacity, iconName, description, itemCharacteristics, weight,

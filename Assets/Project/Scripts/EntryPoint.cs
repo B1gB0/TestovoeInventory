@@ -70,33 +70,33 @@ namespace Project.Scripts
 
         private void Start() 
         {
+            _currentOwnerId = PlayerOwner;
+            
             _gameStateProvider = new GameStateProvider(_storageService);
             _gameStateProvider.LoadGameState();
-
-            var gameState = _gameStateProvider.GameState;
-
-            _inventoryService = new InventoryService(_gameStateProvider);
-            
+            _gameStateProvider.GetItemsFromGameSettings();
             _iconsOfItemsDictionaryData.GetDataOfSprites(_iconsListSprites.Keys, _iconsListSprites.Icons);
 
-            Equipment equipment = new Equipment(gameState.EquipmentData);
+            var gameState = _gameStateProvider.GameState;
+            _inventoryService = new InventoryService();
             
-            _panelDescriptionController = new PanelDescriptionController(_panelDescriptionView,
-                _iconsOfItemsDictionaryData, _inventoryService, _player, _equipmentView, equipment, _gameStateProvider);
-
-            _inputHandler.GetPanelDescriptionController(_panelDescriptionController);
-
-            _player.GetDataFromGameState(gameState.PlayerData);
-            _enemy.GetDataFromGameState(gameState.EnemyData);
-
             foreach (var inventoryData in gameState.Inventories)
             {
                 _inventoryService.RegisterInventory(inventoryData);
             }
+
+            Equipment equipment = new Equipment(gameState.EquipmentData);
+            
+
+            _player.GetDataFromGameState(gameState.PlayerData);
+            _enemy.GetDataFromGameState(gameState.EnemyData);
+
+            _panelDescriptionController = new PanelDescriptionController(_panelDescriptionView,
+                _iconsOfItemsDictionaryData, _inventoryService, _player, _equipmentView, equipment, _gameStateProvider);
+            _inputHandler.GetPanelDescriptionController(_panelDescriptionController);
             
             _screenController = new ScreenController(_inventoryService, _screenView, _iconsOfItemsDictionaryData);
             _screenController.OpenInventory(PlayerOwner);
-            _currentOwnerId = PlayerOwner;
 
             _healthBarPlayer = _viewFactory.CreatePlayerHealthBar(_player.Health);
             _healthBarEnemy = _viewFactory.CreateEnemyHealthBar(_enemy.Health);
@@ -137,8 +137,8 @@ namespace Project.Scripts
         private void GetRandomItem()
         {
             var randomIndex = Random.Range(0, _gameStateProvider.GameSettings.Items.Count);
-            var itemSlotCapacity = _gameStateProvider.GameSettings.Items[randomIndex].CellCapacity;
             var randomItemId = _gameStateProvider.GameSettings.Items[randomIndex].Id;
+            var itemSlotCapacity = _gameStateProvider.GameSettings.Items[randomIndex].CellCapacity;
             var randomIconName = _gameStateProvider.GameSettings.Items[randomIndex].IconName;
             var randomDescription = _gameStateProvider.GameSettings.Items[randomIndex].Description;
             var randomItemCharacteristics = _gameStateProvider.GameSettings.Items[randomIndex].ItemCharacteristics;
@@ -146,6 +146,8 @@ namespace Project.Scripts
             var randomItemClassItem = _gameStateProvider.GameSettings.Items[randomIndex].ClassItem;
             var randomItemTitle = _gameStateProvider.GameSettings.Items[randomIndex].Title;
             var randomItemSpecialization = _gameStateProvider.GameSettings.Items[randomIndex].Specialization;
+            Debug.Log(randomIndex);
+            Debug.Log(randomItemId);
             var randomAmount = Random.Range(1, itemSlotCapacity);
                 
             Debug.Log(randomItemSpecialization);
@@ -174,6 +176,7 @@ namespace Project.Scripts
             _gameStateProvider.SaveGameState();
             _healthBarPlayer.Dispose();
             _healthBarEnemy.Dispose();
+            _screenController.Dispose();
         }
     }
 }

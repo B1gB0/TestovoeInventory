@@ -28,6 +28,7 @@ namespace Project.Scripts.Inventory
                     var position = new Vector2Int(i, j);
 
                     _mapSlots[position] = slot;
+                    slot.GetPosition(position);
                 }
             }
         }
@@ -37,19 +38,7 @@ namespace Project.Scripts.Inventory
         public event Action<Vector2Int> SizeChanged;
 
         public string OwnerId => _data.OwnerId;
-        
-        public Vector2Int Size
-        {
-            get => _data.Size;
-            set
-            {
-                if (_data.Size != value)
-                {
-                    _data.Size = value;
-                    SizeChanged?.Invoke(value);
-                }
-            }
-        }
+        public Vector2Int Size => _data.Size;
         
         public AddItemsToInventoryGridResult AddItem(string itemId, int itemSlotCapacity, string iconName,
             string description, int characteristics, float weight, string classItem, string title,
@@ -218,11 +207,6 @@ namespace Project.Scripts.Inventory
             slotB.GetAmount(tempSlotAmount);
         }
 
-        public void SetSize(Vector2Int newSize)
-        {
-            throw new NotImplementedException();
-        }
-        
         public IReadOnlyInventorySlot[,] GetSlots()
         {
             var array = new IReadOnlyInventorySlot[Size.x, Size.y];
@@ -270,9 +254,11 @@ namespace Project.Scripts.Inventory
 
                     if (newValue > itemSlotCapacity)
                     {
+                        Debug.Log(itemSlotCapacity);
                         remainingAmount = newValue - itemSlotCapacity;
                         var itemsToAddAmount = itemSlotCapacity - slot.Amount;
                         itemsAddedAmount += itemsToAddAmount;
+                        Debug.Log(itemSlotCapacity);
                         slot.GetAmount(itemSlotCapacity);
 
                         if (remainingAmount == 0)

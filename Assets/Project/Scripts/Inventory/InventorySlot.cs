@@ -1,6 +1,7 @@
 using System;
 using Project.Scripts.Inventory.Data;
 using Project.Scripts.Inventory.ReadOnly;
+using UnityEngine;
 
 namespace Project.Scripts.Inventory
 {
@@ -21,6 +22,8 @@ namespace Project.Scripts.Inventory
         public event Action<int> ItemAmountChanged;
         public event Action<string> ItemIconChanged;
         public event Action<string, int, float, string, string, string> ItemDescriptionChanged;
+        public event Action<Vector2Int> PositionChanged;
+        public event Action<int> CapacityChanged;
 
         public string ItemId { get; private set; }
         public int Amount { get; private set; }
@@ -31,6 +34,7 @@ namespace Project.Scripts.Inventory
         public string ClassItem { get; private set; }
         public string Title { get; private set; }
         public string Specialization { get; private set; }
+        public Vector2Int Position { get; private set; }
 
         public int Capacity => _data.Capacity;
         public bool IsEmpty => Amount == 0 && string.IsNullOrEmpty(ItemId);
@@ -62,6 +66,7 @@ namespace Project.Scripts.Inventory
             ItemIconChanged?.Invoke(iconName);
             ItemIdChanged?.Invoke(itemId);
             ItemDescriptionChanged?.Invoke(description, itemCharacteristics, weight, classItem, title, specialization);
+            CapacityChanged?.Invoke(_data.Capacity);
         }
 
         public void GetAmount(int amount)
@@ -74,6 +79,18 @@ namespace Project.Scripts.Inventory
             }
 
             ItemAmountChanged?.Invoke(amount);
+        }
+
+        public void GetPosition(Vector2Int position)
+        {
+            Position = position;
+
+            if (_data.Position != Position)
+            {
+                _data.Position = Position;
+            }
+            
+            PositionChanged?.Invoke(position);
         }
     }
 }
